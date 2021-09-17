@@ -4,6 +4,12 @@ button.link {
 	color: #E8F9FA;
 }
 
-.customBackdrop {
+.custom-modal {
 	background-color: #151146;
+	color: #E8F9FA;
+}
+
+.custom-modal .btn-interest {
+	background-color: #D0E7F5;
+	color: #151146;
 }

@@ -8,15 +8,17 @@
 </div>
 
 <ng-template #modal let-modal>
-	<div class="modal-header">
+	<div class="modal-header custom-modal">
 		<h4 class="modal-title">
-			Select an Interest
+			Select Interest
 		</h4>
-		<button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
 	</div>
-	<div class="modal-body">
-		<button class="btn btn-block" *ngFor="let interest of interests">
-			{{interest.slice(0,1).toUpperCase + interest.slice(1)}}
+	<div class="modal-body custom-modal">
+		<button
+			class="btn btn-block btn-interest"
+			*ngFor="let interest of interests"
+			(click)="changeInterest(modal, interest)">
+			{{interest.slice(0,1).toUpperCase() + interest.slice(1)}}
 		</button>
 	</div>
 </ng-template>

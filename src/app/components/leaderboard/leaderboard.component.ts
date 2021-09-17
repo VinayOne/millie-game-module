@@ -39,4 +39,11 @@ export class LeaderboardComponent implements OnInit {
   openModal(modal: any): void {
     this.modalService.open(modal, this.modalOptions).result.then((result) => {}, (reason) => {});
   }
+
+  changeInterest(modal: any, interest: string) {
+    this.interest = interest.slice(0,1).toUpperCase() + interest.slice(1);
+    modal.close();
+    // more robust way to reload component
+    this.ngOnInit();
+  }
 }
