@@ -75,7 +75,11 @@
               "browserTarget": "millie-game-module:build:development"
             }
           },
-          "defaultConfiguration": "development"
+          "options": {
+            "browserTarget": "millie-game-module:build",
+            "proxyConfig": "src/proxy.conf.json"
+          },
+          "defaultConfiguration": "development",
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",

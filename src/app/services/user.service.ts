@@ -3,15 +3,26 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { User } from '../User';
 
+const httpOptions = {
+  headers: new HttpHeaders({
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*"
+  })
+};
+
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl: string = "http://localhost:5000/users";
+  private apiUrl: string = "/api/users";
 
   constructor(private http: HttpClient) { }
 
   getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.apiUrl);
+    return this.http.get<User[]>(this.apiUrl, httpOptions);
+  }
+
+  getUser(username: string): Observable<User> {
+    return this.http.get<User>(this.apiUrl + `/${username}`, httpOptions);
   }
 }

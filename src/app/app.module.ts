@@ -9,6 +9,12 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LeaderboardComponent } from './components/leaderboard/leaderboard.component';
 import { InfoBoardComponent } from './components/info-board/info-board.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { InfographicComponent } from './components/infographic/infographic.component';
+import { ItemsComponent } from './components/items/items.component';
+import { ItemComponent } from './components/item/item.component';
+import { MilliesThisQuestComponent } from './components/millies-this-quest/millies-this-quest.component';
+import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
+import { GameAreaComponent } from './components/game-area/game-area.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +22,13 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
     DashboardComponent,
     LeaderboardComponent,
     InfoBoardComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    InfographicComponent,
+    ItemsComponent,
+    ItemComponent,
+    MilliesThisQuestComponent,
+    ProgressBarComponent,
+    GameAreaComponent
   ],
   imports: [
     BrowserModule,

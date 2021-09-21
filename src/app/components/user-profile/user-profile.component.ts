@@ -7,7 +7,7 @@ import { User } from "../../User";
   styleUrls: ['./user-profile.component.css']
 })
 export class UserProfileComponent implements OnInit {
-  @Input() user: User = { image: "", username: "", score: 0, interests: [] };
+  @Input() user: User = { image: "", username: "", millies: 0, interests: [] };
 
   constructor() { }
 

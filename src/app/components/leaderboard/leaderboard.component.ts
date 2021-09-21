@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { User } from "../../User";
 import { UserService } from "../../services/user.service";
-import { UiService } from "../../services/ui.service";
 import {NgbModal, ModalDismissReasons, NgbModalOptions} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -12,27 +11,28 @@ import {NgbModal, ModalDismissReasons, NgbModalOptions} from '@ng-bootstrap/ng-b
 
 export class LeaderboardComponent implements OnInit {
   @Input() users: User[] = [];
-  user: User[] = [];
+  user: User = { image: "", username: "", millies: 0, interests: [] };
   interests: string[] = [];
   interest: string = "Hiking";
+  showLeaderboard: boolean = true;
   modalOptions: NgbModalOptions = {};
 
-  constructor(private uiService: UiService, private userService: UserService, private modalService: NgbModal) { }
+  constructor(private userService: UserService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.userService.getUsers().subscribe((users) => {
-      this.user = users.filter(user => user.username == "scottie11");
+      this.user = users.filter(user => user.username == "scottie11")[0];
+
+      this.interests = this.user.interests;
 
       users = users.filter(user => user.interests.some(interest => this.interest.toLowerCase() == interest));
 
-      users.sort((userA, userB) => userB.score - userA.score);
+      users.sort((userA, userB) => userB.millies - userA.millies);
 
       users.forEach((user, index) => user.rank = index + 1);
 
       this.users = users.filter(user => (user.rank && user.rank <= 3)).concat(this.user);
     });
-
-    this.uiService.getInterests().subscribe((interests) => this.interests = interests);
   }
 
   // may need to change modal's data type to be more secure
@@ -45,5 +45,9 @@ export class LeaderboardComponent implements OnInit {
     modal.close();
     // more robust way to reload component
     this.ngOnInit();
+  }
+
+  toggleLeaderboard() {
+    this.showLeaderboard = !this.showLeaderboard;
   }
 }

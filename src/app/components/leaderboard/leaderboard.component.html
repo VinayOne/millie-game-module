@@ -1,5 +1,7 @@
-<button class="link" (click)="openModal(modal)">Leaderboard: {{interest}}</button>
-<div class="row">
+<button class="link" (click)="toggleLeaderboard()"><div [ngClass]="showLeaderboard ? 'arrow-up' : 'arrow-down'"></div></button>
+<button *ngIf="showLeaderboard" class="link" (click)="openModal(modal)">Leaderboard: {{interest}}</button>
+<div *ngIf="!showLeaderboard" style="display: inline-block;">Leaderboard: {{interest}}</div>
+<div *ngIf="showLeaderboard" class="row">
 	<app-user-profile
 		class="col text-center"
 		*ngFor="let user of users"
