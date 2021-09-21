@@ -4,10 +4,9 @@
   "scripts": {
     "ng": "ng",
     "start": "nodemon server.js",
-    "build": "ng build",
+    "build": "ng build --prod",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "server": "json-server --watch db.json --port 5000"
+    "test": "ng test"
   },
   "private": true,
   "dependencies": {
@@ -27,6 +26,7 @@
     "express": "^4.17.1",
     "json-server": "^0.16.3",
     "mongoose": "^6.0.7",
+    "path": "^0.12.7",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

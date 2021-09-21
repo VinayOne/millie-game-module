@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const path = require("path");
 
 const routes = require("./routes");
 
@@ -16,14 +17,20 @@ const connectionParams={
 
 mongoose.connect(url,connectionParams)
     .then( () => {
-        console.log('Connected to database ');
-
         app.use(cors());
 		app.use(bodyParser.json());
 
+		app.use(express.static(path.join(__dirname, "src")));
+
+		app.get('*', (req, res) => {
+		  res.sendFile(path.join(__dirname, "src/index.html"));
+		});
+
 		app.use("/api", routes);
 
-		const server = app.listen(process.env.PORT || 3000, () => console.log("Listening on port 3000"));
+		const port = process.env.PORT || 3000;
+
+		const server = app.listen(port, () => console.log(`Listening on port ${port}`));
     })
     .catch( (err) => {
         console.error(`Error connecting to the database. \n${err}`);
