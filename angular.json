@@ -69,7 +69,8 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "millie-game-module:build:production"
+              "browserTarget": "millie-game-module:build:production",
+              "proxyConfig": "src/proxy-prod.conf.json"
             },
             "development": {
               "browserTarget": "millie-game-module:build:development"
@@ -77,7 +78,7 @@
           },
           "options": {
             "browserTarget": "millie-game-module:build",
-            "proxyConfig": "src/proxy.conf.json"
+            "proxyConfig": "src/proxy-dev.conf.json"
           },
           "defaultConfiguration": "development",
         },

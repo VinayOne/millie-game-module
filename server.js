@@ -23,7 +23,7 @@ mongoose.connect(url,connectionParams)
 
 		app.use("/api", routes);
 
-		const server = app.listen(3000, () => console.log("Listening on port 3000"));
+		const server = app.listen(process.env.PORT || 3000, () => console.log("Listening on port 3000"));
     })
     .catch( (err) => {
         console.error(`Error connecting to the database. \n${err}`);
