@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'millie-game-module';
+  height: number = 0;
+
+  getHeight(height: number) {
+    this.height = height;
+  }
 }
