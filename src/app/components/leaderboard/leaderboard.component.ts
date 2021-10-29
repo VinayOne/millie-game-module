@@ -31,7 +31,7 @@ export class LeaderboardComponent implements OnInit {
 
       users.forEach((user, index) => user.rank = index + 1);
 
-      this.users = users.filter(user => (user.rank && user.rank <= 3)).concat(this.user);
+      this.users = users.filter(user => (user.rank && user.rank <= 3));
     });
   }
 

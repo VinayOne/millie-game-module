@@ -4,6 +4,7 @@ const schema = mongoose.Schema({
 	rank: Number,
 	image: String,
 	username: String,
+	password: String,
 	millies: Number,
 	interests: [String],
 	millies_this_quest: Number,

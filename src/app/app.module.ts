@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +16,9 @@ import { ItemComponent } from './components/item/item.component';
 import { MilliesThisQuestComponent } from './components/millies-this-quest/millies-this-quest.component';
 import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
 import { GameAreaComponent } from './components/game-area/game-area.component';
+import { LoginComponent } from './components/login/login.component';
+import { ContentAreaComponent } from './components/content-area/content-area.component';
+import { UserBoardComponent } from './components/user-board/user-board.component';
 
 @NgModule({
   declarations: [
@@ -28,13 +32,17 @@ import { GameAreaComponent } from './components/game-area/game-area.component';
     ItemComponent,
     MilliesThisQuestComponent,
     ProgressBarComponent,
-    GameAreaComponent
+    GameAreaComponent,
+    LoginComponent,
+    ContentAreaComponent,
+    UserBoardComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
