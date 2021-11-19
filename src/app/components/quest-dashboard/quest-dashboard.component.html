@@ -1,0 +1,14 @@
+<div class="container pt-3 justify-content-center">
+	<h3>New Quest</h3>
+	<form>
+		<div class="form-group">
+		    <div class="input-group mb-2">
+		    	<div class="input-group-prepend">
+		        	<div class="input-group-text" id="numOfLevelsLabel">How many levels will this quest have?</div>
+		    	</div>
+		    	<input type="number" min="1" class="form-control col-lg-2 text-center" (change)="setNumOfLevels($event)">
+		    </div>
+	  	</div>
+	  <button type="submit" class="btn" (click)="onNext()">Next</button>
+	</form>
+</div>

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ContentAreaComponent } from './components/content-area/content-area.component';
 import { LoginComponent } from './components/login/login.component';
+import { CreatorDashboardComponent } from './components/creator-dashboard/creator-dashboard.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: 'games',
     component: ContentAreaComponent
+  },
+  {
+    path: 'dashboard',
+    component: CreatorDashboardComponent
   }
 ];
 

@@ -19,6 +19,9 @@ import { GameAreaComponent } from './components/game-area/game-area.component';
 import { LoginComponent } from './components/login/login.component';
 import { ContentAreaComponent } from './components/content-area/content-area.component';
 import { UserBoardComponent } from './components/user-board/user-board.component';
+import { LevelDashboardComponent } from './components/level-dashboard/level-dashboard.component';
+import { QuestDashboardComponent } from './components/quest-dashboard/quest-dashboard.component';
+import { CreatorDashboardComponent } from './components/creator-dashboard/creator-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +38,10 @@ import { UserBoardComponent } from './components/user-board/user-board.component
     GameAreaComponent,
     LoginComponent,
     ContentAreaComponent,
-    UserBoardComponent
+    UserBoardComponent,
+    LevelDashboardComponent,
+    QuestDashboardComponent,
+    CreatorDashboardComponent
   ],
   imports: [
     BrowserModule,
