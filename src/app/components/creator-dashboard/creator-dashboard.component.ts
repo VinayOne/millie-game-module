@@ -6,16 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./creator-dashboard.component.css']
 })
 export class CreatorDashboardComponent implements OnInit {
-  levels: number = 1;
-  settingLevels: boolean = true;
+  state: any = { };
 
   constructor() { }
 
   ngOnInit(): void {
+    this.state.settingLevels = true;
   }
 
   getState(state: any) {
-    this.levels = state.levels;
-    this.settingLevels = state.settingLevels;
+    this.state = state;
   }
 }

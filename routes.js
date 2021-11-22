@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const router = express.Router();
 
 const User = require("./models/User");
+const Game = require("./models/Game");
 
 function verifyToken(req, res, next) {
 	if (!req.headers.authorization)
@@ -50,6 +51,23 @@ router.get("/users/:username", async (req, res) => {
 router.get("/users", async (req, res) => {
 	const users = await User.find();
 	res.status(200).send(users);
+});
+
+router.post("/game", async (req, res) => {
+	const game = new Game({
+		name: req.body.name,
+		season: req.body.season,
+		date: req.body.date,
+		levels: req.body.levels
+	});
+
+	await game.save();
+	res.send(game);
+});
+
+router.get("/game/:id", async (req, res) => {
+	const game = await Game.findOne({ id: req.params.id });
+	res.status(200).send(game);
 });
 
 module.exports = router;

@@ -1,6 +1,6 @@
-<div *ngIf="settingLevels">
+<div *ngIf="state.settingLevels">
 	<app-quest-dashboard (state)="getState($event)"></app-quest-dashboard>
 </div>
-<div *ngIf="!settingLevels">
-	<app-level-dashboard [numOfLevels]="levels"></app-level-dashboard>
+<div *ngIf="!state.settingLevels">
+	<app-level-dashboard [state]="state"></app-level-dashboard>
 </div>

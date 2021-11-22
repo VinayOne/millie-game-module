@@ -1,14 +1,30 @@
 <div class="container pt-3 justify-content-center">
 	<h3>New Quest</h3>
-	<form>
+	<form (submit)="onSubmit()">
+		<div class="form-group">
+		    <div class="input-group mb-2">
+		    	<div class="input-group-prepend">
+		        	<div class="input-group-text" id="questNameLabel">What name will this quest have?</div>
+		    	</div>
+		    	<input type="text" class="form-control col-lg-2 text-center" [(ngModel)]="questName" name="questName">
+		    </div>
+	  	</div>
+	  	<div class="form-group">
+		    <div class="input-group mb-2">
+		    	<div class="input-group-prepend">
+		        	<div class="input-group-text" id="seasonNameLabel">What name will this season have?</div>
+		    	</div>
+		    	<input type="text" class="form-control col-lg-2 text-center" [(ngModel)]="seasonName" name="seasonName">
+		    </div>
+	  	</div>
 		<div class="form-group">
 		    <div class="input-group mb-2">
 		    	<div class="input-group-prepend">
 		        	<div class="input-group-text" id="numOfLevelsLabel">How many levels will this quest have?</div>
 		    	</div>
-		    	<input type="number" min="1" class="form-control col-lg-2 text-center" (change)="setNumOfLevels($event)">
+		    	<input type="number" min="1" class="form-control col-lg-2 text-center" [(ngModel)]="levels" name="levels">
 		    </div>
 	  	</div>
-	  <button type="submit" class="btn" (click)="onNext()">Next</button>
+	  <button type="submit" class="btn">Next</button>
 	</form>
 </div>

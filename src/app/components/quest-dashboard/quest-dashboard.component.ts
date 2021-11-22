@@ -1,5 +1,4 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-quest-dashboard',
@@ -7,20 +6,22 @@ import { Router } from '@angular/router';
   styleUrls: ['./quest-dashboard.component.css']
 })
 export class QuestDashboardComponent implements OnInit {
-  numOfLevels: number = 1;
+  questName: string = "";
+  seasonName: string = "";
+  levels: number = 1;
   @Output() state: EventEmitter<object> = new EventEmitter();
 
-  constructor(private router: Router) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
 
-  setNumOfLevels(event: any) {
-    if (event.target.value)
-      this.numOfLevels = event.target.value;
-  }
-
-  onNext() {
-    this.state.emit({ levels: this.numOfLevels, settingLevels: false });
+  onSubmit() {
+    this.state.emit({
+      questName: this.questName,
+      seasonName: this.seasonName,
+      levels: this.levels,
+      settingLevels: false
+    });
   }
 }

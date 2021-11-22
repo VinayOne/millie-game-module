@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,9 +7,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./level-dashboard.component.css']
 })
 export class LevelDashboardComponent implements OnInit {
-  @Input() numOfLevels: number = 1;
+  @Input() state: any = { };
+
+  millies: number = 0;
+  image: string = "";
+  constructGame: string = "";
+
+  levels: any[] = [];
   level: number = 1;
   numOfQuestions: number = 1;
+  questions: any[] = [{ question: "", correct: [], answer: ["", "", "", ""] }];
   lastQuestion: boolean = false;
 
   constructor(private router: Router) { }
@@ -17,18 +24,27 @@ export class LevelDashboardComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  setNumOfQuestions(event: any) {
-    this.numOfQuestions = event.target.value;
-  }
-
   counter() {
     return new Array(this.numOfQuestions);
   }
 
   onNext() {
-    this.level++;
+    // for (let index = 0; index < 4; index++) {
+    //   if ()
+    // }
 
-    if (this.level == this.numOfLevels)
+    this.levels[this.level - 1] = {
+      questions: this.questions,
+      millies: this.millies,
+      image: this.image,
+      constructGame: this.constructGame
+    };
+
+    console.log(this.levels);
+
+    this.level++;
+    this.numOfQuestions = 1;
+    if (this.level == this.state.levels)
       this.lastQuestion = true;
   }
 
