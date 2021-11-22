@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 export class LevelDashboardComponent implements OnInit {
   @Input() state: any = { };
 
+  radioSelected: string = "";
   millies: number = 0;
   image: string = "";
   constructGame: string = "";
@@ -16,7 +17,7 @@ export class LevelDashboardComponent implements OnInit {
   levels: any[] = [];
   level: number = 1;
   numOfQuestions: number = 1;
-  questions: any[] = [{ question: "", correct: [], answer: ["", "", "", ""] }];
+  questions: any[] = [{ question: "", correct: "", answer: ["", "", "", ""] }];
   lastQuestion: boolean = false;
 
   constructor(private router: Router) { }
@@ -29,9 +30,10 @@ export class LevelDashboardComponent implements OnInit {
   }
 
   onNext() {
-    // for (let index = 0; index < 4; index++) {
-    //   if ()
-    // }
+    console.log(this.radioSelected);
+
+    for (let index = 0; index < this.numOfQuestions; index++)
+      this.questions[index].correct = this.questions[index].answer[this.radioSelected];
 
     this.levels[this.level - 1] = {
       questions: this.questions,

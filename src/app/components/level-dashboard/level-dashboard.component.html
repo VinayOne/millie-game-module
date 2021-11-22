@@ -19,25 +19,25 @@
 			<div class="card-body">
 				<div class="form-group">
 					<div class="form-check form-check-inline col-lg-12">
-						<input class="form-check-input" type="radio" [(value)]="questions[i].correct[0]" name="answer">
+						<input class="form-check-input" type="radio" [(ngModel)]="radioSelected" name="answer" value="0" />
   						<input name="firstAnswer" type="text" class="form-control" required [(ngModel)]="questions[i].answer[0]" name="answerText" />
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="form-check form-check-inline col-lg-12">
-						<input class="form-check-input" type="radio" [(value)]="questions[i].correct[1]" name="answer">
+						<input class="form-check-input" type="radio" [(ngModel)]="radioSelected" name="answer" value="1" />
   						<input name="firstAnswer" type="text" class="form-control" required [(ngModel)]="questions[i].answer[1]" name="answerText" />
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="form-check form-check-inline col-lg-12">
-						<input class="form-check-input" type="radio" [(value)]="questions[i].correct[2]" name="answer">
+						<input class="form-check-input" type="radio" [(ngModel)]="radioSelected" name="answer" value="2" />
   						<input name="firstAnswer" type="text" class="form-control" required [(ngModel)]="questions[i].answer[2]" name="answerText" />
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="form-check form-check-inline col-lg-12">
-						<input class="form-check-input" type="radio" [(value)]="questions[i].correct[3]" name="answer">
+						<input class="form-check-input" type="radio" [(ngModel)]="radioSelected" name="answer" value="3" />
   						<input name="firstAnswer" type="text" class="form-control" required [(ngModel)]="questions[i].answer[3]" name="answerText" />
 					</div>
 				</div>
