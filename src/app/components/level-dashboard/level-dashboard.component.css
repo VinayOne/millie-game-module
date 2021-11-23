@@ -1,6 +1,10 @@
-#numOfQuestionsLabel, #amountOfMilliesLabel, #imageLinkLabel, #constructLinkLabel {
+#numOfQuestionsLabel, #amountOfMilliesLabel, #imageLinkLabel {
 	background-color: #EC56A3;
 	color: #E8F9FA;
+}
+
+#constructLinkLabel {
+	color: #EC56A3;
 }
 
 button {

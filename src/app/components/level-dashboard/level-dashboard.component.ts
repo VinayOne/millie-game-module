@@ -29,8 +29,12 @@ export class LevelDashboardComponent implements OnInit {
     return new Array(this.numOfQuestions);
   }
 
+  setGame() {
+    this.constructGame = "Water Sort";
+  }
+
   onNext() {
-    console.log(this.radioSelected);
+    console.log(this.constructGame);
 
     for (let index = 0; index < this.numOfQuestions; index++)
       this.questions[index].correct = this.questions[index].answer[this.radioSelected];
@@ -41,8 +45,6 @@ export class LevelDashboardComponent implements OnInit {
       image: this.image,
       constructGame: this.constructGame
     };
-
-    console.log(this.levels);
 
     this.level++;
     this.numOfQuestions = 1;

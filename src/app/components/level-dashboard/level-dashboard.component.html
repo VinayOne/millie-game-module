@@ -59,14 +59,15 @@
 		    	<input type="form-text" class="form-control text-center" [(ngModel)]="image" name="image">
 		    </div>
 	  	</div>
-	  	<div class="form-group">
-		    <div class="input-group mb-2">
-		    	<div class="input-group-prepend">
-		        	<div class="input-group-text" id="constructLinkLabel">What is the  link for the Construct game?</div>
-		    	</div>
-		    	<input type="form-text" class="form-control text-center" [(ngModel)]="constructGame" name="constructGame">
-		    </div>
-	  	</div>
+	  	<div class="form-group dropdown">
+	  		<div id="constructLinkLabel">What is the  link for the Construct game?</div>
+			<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				{{constructGame || "No game selected"}}
+			</button>
+			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+				<a class="dropdown-item form-control" value="Water Sort" name="constructGame" (click)="setGame()">Water Sort</a>
+			</div>
+		</div>
 	  	<div *ngIf="!lastQuestion">
 			<button type="submit" class="btn" (click)="onNext()">Next</button>
 		</div>
