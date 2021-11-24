@@ -56,8 +56,9 @@ router.get("/users", async (req, res) => {
 router.post("/game", async (req, res) => {
 	const game = new Game({
 		name: req.body.name,
-		season: req.body.season,
-		date: req.body.date,
+		seasonName: req.body.seasonName,
+		startDate: req.body.startDate,
+		endDate: req.body.endDate,
 		levels: req.body.levels
 	});
 

@@ -4,9 +4,9 @@
 		<div class="form-group">
 		    <div class="input-group mb-2">
 		    	<div class="input-group-prepend">
-		        	<div class="input-group-text" id="questNameLabel">What name will this quest have?</div>
+		        	<div class="input-group-text" id="nameLabel">What name will this quest have?</div>
 		    	</div>
-		    	<input type="text" class="form-control col-lg-2 text-center" [(ngModel)]="questName" name="questName">
+		    	<input type="text" class="form-control col-lg-2 text-center" [(ngModel)]="name" name="name">
 		    </div>
 	  	</div>
 	  	<div class="form-group">
@@ -43,7 +43,7 @@
 		    	<div class="input-group-prepend">
 		        	<div class="input-group-text" id="numOfLevelsLabel">How many levels will this quest have?</div>
 		    	</div>
-		    	<input type="number" min="1" class="form-control col-lg-2 text-center" [(ngModel)]="levels" name="levels">
+		    	<input type="number" min="1" class="form-control col-lg-2 text-center" [(ngModel)]="numOfLevels" name="numOfLevels">
 		    </div>
 	  	</div>
 	  <button type="submit" class="btn">Next</button>

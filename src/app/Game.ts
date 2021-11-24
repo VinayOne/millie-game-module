@@ -1,10 +1,8 @@
-const mongoose = require("mongoose");
-
-const schema = mongoose.Schema({
+export interface Game {
 	name: String,
 	seasonName: String,
-	startDate: Date,
-	endDate: Date,
+	startDate: any,
+	endDate: any,
 	levels: [{
 		questions: [{
 			question: String,
@@ -19,6 +17,4 @@ const schema = mongoose.Schema({
 			imageLink: String
 		}]
 	}]
-});
-
-module.exports = mongoose.model("Game", schema);
+}
