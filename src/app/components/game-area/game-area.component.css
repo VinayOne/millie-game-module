@@ -1,6 +1,12 @@
 div {
 	background-color: #D0E7F5;
 }
+
+#nextButton {
+	background-color: #151146;
+	color: #E8F9FA;
+}
+
 .row {
     min-height: 250px;
 }

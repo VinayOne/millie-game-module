@@ -66,8 +66,10 @@ router.post("/game", async (req, res) => {
 	res.send(game);
 });
 
-router.get("/game/:id", async (req, res) => {
-	const game = await Game.findOne({ id: req.params.id });
+router.get("/game", async (req, res) => {
+	const currDate = new Date();
+
+	const game = await Game.findOne({ startDate: { $lte: currDate }, endDate: { $gte: currDate } });
 	res.status(200).send(game);
 });
 

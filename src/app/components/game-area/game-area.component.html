@@ -1,6 +1,31 @@
 <div class="container">
 	<div class="row" [ngStyle]="{'height': 'calc(100vh - ' + dashboardHeight + 'px)'}">
-		<iframe width="100%" allow="fullscreen; autoplay; encrypted-media" src="https://brandon-earwood.github.io/water-sort/" frameborder="0" allowfullscreen="true" msallowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true" allowpaymentrequest="false" referrerpolicy="unsafe-url" sandbox="allow-same-origin allow-forms allow-scripts allow-pointer-lock allow-orientation-lock allow-popups" scrolling="no"></iframe>
+		<iframe width="100%" allow="fullscreen; autoplay; encrypted-media" src="https://brandon-earwood.github.io/water-sort/" frameborder="0" allowfullscreen="true" msallowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true" allowpaymentrequest="false" referrerpolicy="unsafe-url" sandbox="allow-same-origin allow-forms allow-scripts allow-pointer-lock allow-orientation-lock allow-popups" scrolling="no" class="mb-3" *ngIf="this.gameState.playingConstructGame"></iframe>
+
+		<div class="col-lg-12">
+			<div class="card rounded-0 mt-3 mb-3" *ngIf="this.gameState.answeringQuestions">
+				<div class="card-header">
+					<h3 class="mb-0">
+						<label for="question">Question {{gameState.currentQuestion + 1}}</label>
+		    			<label class="d-block" name="question">
+		    				{{game.levels[gameState.currentLevel].questions[gameState.currentQuestion].question}}
+		    			</label>
+					</h3>
+				</div>
+				<div class="card-body">
+					<div class="form-group" *ngFor="let answer of game.levels[gameState.currentLevel].questions[gameState.currentQuestion].answer">
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio" [(ngModel)]="gameState.radioSelected" name="radioAnswer" value="{{answer}}" />
+	  						<label name="firstAnswer" type="text" required name="answerText">
+	  							{{answer}}
+	  						</label>
+						</div>
+					</div>
+				</div>
+			</div>
+			<button class="btn" id="nextButton" (click)="updateState()" *ngIf="!this.gameState.playingConstructGame">Next</button>
+			<button class="btn" id="nextButton" (click)="updateState()" *ngIf="this.gameState.playingConstructGame">Next Level</button>
+		</div>
 	</div>
 </div>
 
