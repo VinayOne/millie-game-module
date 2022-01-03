@@ -6,11 +6,7 @@ const schema = mongoose.Schema({
 	startDate: Date,
 	endDate: Date,
 	levels: [{
-		questions: [{
-			question: String,
-			correct: String,
-			answer: [String]
-		}],
+		alchemerLink: String,
 		millies: Number,
 		imageLink: String,
 		constructLink: String,

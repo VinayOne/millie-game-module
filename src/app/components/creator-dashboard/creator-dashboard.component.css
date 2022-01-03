@@ -1,0 +1,27 @@
+#numOfQuestionsLabel, #numOfRewardsLabel, #amountOfMilliesLabel, #imageLinkLabel, #alchemerLinkLabel {
+	background-color: #EC56A3;
+	color: #E8F9FA;
+}
+
+#constructLinkLabel {
+	color: #EC56A3;
+}
+
+#submitButton {
+	background-color: #151146;
+	color: #E8F9FA;
+}
+
+#numOfLevelsLabel, #nameLabel, #seasonNameLabel {
+	background-color: #EC56A3;
+	color: #E8F9FA;
+}
+
+#datesLabel {
+	color: #EC56A3;
+}
+
+button {
+	background-color: #0A52CE;
+	color: #E8F9FA;
+}

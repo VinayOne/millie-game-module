@@ -1,0 +1,26 @@
+<div class="container">
+	<div class="row">
+		<div class="col-6" *ngFor="let game of games">
+			<div class="card mt-3">
+				<div class="card-header">
+					<h3 class="mb-0">
+						{{game.name}}
+					</h3>
+					<h3 class="mb-0">
+						{{game.seasonName}}
+					</h3>
+				</div>
+				<div class="card-body">
+					<button class="btn btn-primary mr-2" (click)="onEditGame(game)">Edit</button>
+					<button class="btn btn-danger" (click)="onDeleteGame(game)">Delete</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row mt-3">
+		<div class="col-3">
+			<button class="btn btn-success" (click)="onCreateNewGame()">Create New Game</button>
+		</div>
+	</div>
+</div>
+

@@ -20,9 +20,8 @@ import { GameAreaComponent } from './components/game-area/game-area.component';
 import { LoginComponent } from './components/login/login.component';
 import { ContentAreaComponent } from './components/content-area/content-area.component';
 import { UserBoardComponent } from './components/user-board/user-board.component';
-import { LevelDashboardComponent } from './components/level-dashboard/level-dashboard.component';
-import { QuestDashboardComponent } from './components/quest-dashboard/quest-dashboard.component';
 import { CreatorDashboardComponent } from './components/creator-dashboard/creator-dashboard.component';
+import { CreatorDashboardHomeComponent } from './components/creator-dashboard-home/creator-dashboard-home.component';
 
 @NgModule({
   declarations: [
@@ -40,9 +39,8 @@ import { CreatorDashboardComponent } from './components/creator-dashboard/creato
     LoginComponent,
     ContentAreaComponent,
     UserBoardComponent,
-    LevelDashboardComponent,
-    QuestDashboardComponent,
-    CreatorDashboardComponent
+    CreatorDashboardComponent,
+    CreatorDashboardHomeComponent
   ],
   imports: [
     BrowserModule,

@@ -1,14 +1,11 @@
 export interface Game {
+	_id?: String,
 	name: String,
 	seasonName: String,
 	startDate: any,
 	endDate: any,
 	levels: [{
-		questions: [{
-			question: String,
-			correct: String,
-			answer: [String]
-		}],
+		alchemerLink: String,
 		millies: Number,
 		imageLink: String,
 		constructLink: String,

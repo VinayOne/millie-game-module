@@ -9,13 +9,15 @@ import { Game } from '../../Game';
 })
 export class GameAreaComponent implements OnInit {
   @Input() dashboardHeight: number = 0;
+  answers: String[] = ["red", "blue", "yellow", "green"];
+
   game: Game = {
     name: "",
     seasonName: "",
     startDate: {},
     endDate: {},
     levels: [{
-      questions: [{ question: "", correct: "", answer: [""] }],
+      alchemerLink: "",
       millies: 0,
       imageLink: "", constructLink: "",
       rewards: [{ name: "", imageLink: "" }]
@@ -45,7 +47,7 @@ export class GameAreaComponent implements OnInit {
 
   updateState() {
     if (this.gameState.answeringQuestions) {
-      if (this.gameState.currentQuestion < this.game.levels[this.gameState.currentLevel].questions.length - 1)
+      if (this.gameState.currentQuestion < 3)
         this.gameState.currentQuestion++;
       else {
         this.gameState.answeringQuestions = false;

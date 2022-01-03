@@ -53,23 +53,54 @@ router.get("/users", async (req, res) => {
 	res.status(200).send(users);
 });
 
+router.get("/game/:id", async (req, res) => {
+	if (req.params.id == "current") {
+		const currDate = new Date();
+		const game = await Game.findOne({ startDate: { $lte: currDate }, endDate: { $gte: currDate } });
+		res.status(200).send(game);
+	}
+
+	const game = await Game.findById(req.params.id);
+	res.status(200).send(game);
+});
+
+router.get("/games", async (req, res) => {
+	const games = await Game.find({});
+	res.status(200).send(games);
+});
+
+router.post("/game/:id", async (req, res) => {
+	start = `${req.body.startDate.year}-${req.body.startDate.month}-${req.body.startDate.day}`;
+	end = `${req.body.endDate.year}-${req.body.endDate.month}-${req.body.endDate.day}`;
+
+	const game = await Game.findByIdAndUpdate(req.params.id, {
+		name: req.body.name,
+		seasonName: req.body.seasonName,
+		startDate: start,
+		endDate: end,
+		levels: req.body.levels
+	});
+	res.status(200).send(game);
+});
+
 router.post("/game", async (req, res) => {
+	start = `${req.body.startDate.year}-${req.body.startDate.month}-${req.body.startDate.day}`;
+	end = `${req.body.endDate.year}-${req.body.endDate.month}-${req.body.endDate.day}`;
+
 	const game = new Game({
 		name: req.body.name,
 		seasonName: req.body.seasonName,
-		startDate: req.body.startDate,
-		endDate: req.body.endDate,
+		startDate: start,
+		endDate: end,
 		levels: req.body.levels
 	});
 
 	await game.save();
-	res.send(game);
+	res.status(200).send(game);
 });
 
-router.get("/game", async (req, res) => {
-	const currDate = new Date();
-
-	const game = await Game.findOne({ startDate: { $lte: currDate }, endDate: { $gte: currDate } });
+router.delete("/game/:id", async (req, res) => {
+	const game = await Game.findByIdAndRemove(req.params.id);
 	res.status(200).send(game);
 });
 

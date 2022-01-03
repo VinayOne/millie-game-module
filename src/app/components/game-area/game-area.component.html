@@ -8,12 +8,12 @@
 					<h3 class="mb-0">
 						<label for="question">Question {{gameState.currentQuestion + 1}}</label>
 		    			<label class="d-block" name="question">
-		    				{{game.levels[gameState.currentLevel].questions[gameState.currentQuestion].question}}
+		    				What is my favorite color?
 		    			</label>
 					</h3>
 				</div>
 				<div class="card-body">
-					<div class="form-group" *ngFor="let answer of game.levels[gameState.currentLevel].questions[gameState.currentQuestion].answer">
+					<div class="form-group" *ngFor="let answer of answers">
 						<div class="form-check form-check-inline">
 							<input class="form-check-input" type="radio" [(ngModel)]="gameState.radioSelected" name="radioAnswer" value="{{answer}}" />
 	  						<label name="firstAnswer" type="text" required name="answerText">
