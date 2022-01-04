@@ -16,7 +16,7 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
-    path: 'games',
+    path: '',
     component: ContentAreaComponent
   },
   {
