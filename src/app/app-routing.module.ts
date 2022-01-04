@@ -6,11 +6,11 @@ import { CreatorDashboardHomeComponent } from './components/creator-dashboard-ho
 import { CreatorDashboardComponent } from './components/creator-dashboard/creator-dashboard.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    redirectTo: '/login',
-    pathMatch: 'full'
-  },
+  // {
+  //   path: '',
+  //   redirectTo: '/login',
+  //   pathMatch: 'full'
+  // },
   {
     path: 'login',
     component: LoginComponent
