@@ -43,8 +43,47 @@ export class CreatorDashboardComponent implements OnInit {
       this._id = this.activatedRoute.snapshot.paramMap?.get('id');
 
       this.gameService.getGameById(this._id)
-        .subscribe(res => this.game = res, err => console.log(err));
+        .subscribe(res => {
+            // start = `${req.body.startDate.year}-${req.body.startDate.month}-${req.body.startDate.day}`;
+            this.game.name = res.name;
+            this.game.seasonName = res.seasonName;
+            this.game.startDate = new Date(res.startDate.substring(0, 10));
+            this.game.endDate = new Date(res.endDate.substring(0, 10));
+            this.game.levels = res.levels;
+
+            // this.game.startDate = {
+            //   year: res.startDate.substring(0, 4),
+            //   month: res.startDate.substring(5, 7),
+            //   day: res.startDate.substring(8, 10)
+            // };
+
+            // this.game.endDate = {
+            //   year: res.endDate.substring(0, 4),
+            //   month: res.endDate.substring(5, 7),
+            //   day: res.endDate.substring(8, 10)
+            // };
+
+            console.log(this.game.startDate);
+            console.log(this.game.endDate);
+
+          }, err => console.log(err));      
     }
+  }
+
+  updateLevelsArray() {
+    if (this.numOfLevels > this.game.levels.length)
+      this.game.levels.push({
+        alchemerLink: "",
+        millies: 0,
+        imageLink: "",
+        constructLink: "",
+        rewards: [{
+          name: "",
+          imageLink: ""
+        }]
+      });
+    else
+      this.game.levels.pop();
   }
 
   setGame(levelIndex: number) {

@@ -43,6 +43,9 @@ router.post("/login", (req, res) => {
 	});
 });
 
+accessToken = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm9maWxlSWQiOiI2MTVkNGNkYTk2ZGUwODc1ZGE2MjQxOTMiLCJleHBpcmVzSW4iOiIzMGQiLCJwcm9maWxlVHlwZSI6ImdhbWUiLCJpYXQiOjE2NDI1MTM4NjQsImV4cCI6MTY0NTEwNTg2NH0._5UnEmDnCTC-2cM1RkDDOn6qnKwGP5x0naQ8FYRvPkc`;
+adminAccessToken = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm9maWxlSWQiOiI2MTJkZDJlMTk4MzcwNDFmZDMwZTIxMzAiLCJleHBpcmVzSW4iOiIzMGQiLCJwcm9maWxlVHlwZSI6ImdhbWUtYWRtaW4iLCJpYXQiOjE2NDI1MTQ3MTEsImV4cCI6MTY0NTEwNjcxMX0.yOhHNyh-piBI33udN4qvo-ND2xlQWt920x4RrwYnTfA`;
+
 router.get("/user-detail", async (req, res) => {
 	var axios = require('axios');
 	var data = '';
@@ -51,7 +54,7 @@ router.get("/user-detail", async (req, res) => {
 	  method: 'get',
 	  url: 'http://18.118.169.0:5000/api/v1/user/game/user-detail',
 	  headers: { 
-	    'accessToken': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm9maWxlSWQiOiI2MWRiYzQ2Yjk5MWM4OTQ3MjczMTc4ZWQiLCJleHBpcmVzSW4iOiIzMGQiLCJwcm9maWxlVHlwZSI6ImdhbWUiLCJpYXQiOjE2NDIwODI3MzMsImV4cCI6MTY0NDY3NDczM30.a4jYo1TUFqjiDuDu5vS2SZ-4iaOZgV_oD43oH4tboPw'
+	    'accessToken': adminAccessToken
 	  },
 	  data : data
 	};
@@ -76,14 +79,16 @@ router.get("/users", async (req, res) => {
 });
 
 router.get("/game/:id", async (req, res) => {
-	if (req.params.id == "current") {
-		const currDate = new Date();
-		const game = await Game.findOne({ startDate: { $lte: currDate }, endDate: { $gte: currDate } });
-		res.status(200).send(game);
-	}
-
-	const game = await Game.findById(req.params.id);
-	res.status(200).send(game);
+	Game.findById(req.params.id, async (error, game) => {
+		if (error)
+			console.log(error);
+		else {
+			if (!game)
+				res.status(403).send("Invalid game ID");
+			else
+				res.status(200).send(game);
+		}
+	});	
 });
 
 router.get("/games", async (req, res) => {
@@ -91,7 +96,7 @@ router.get("/games", async (req, res) => {
 	res.status(200).send(games);
 });
 
-router.post("/game/:id", async (req, res) => {
+router.put("/game/:id", async (req, res) => {
 	start = `${req.body.startDate.year}-${req.body.startDate.month}-${req.body.startDate.day}`;
 	end = `${req.body.endDate.year}-${req.body.endDate.month}-${req.body.endDate.day}`;
 

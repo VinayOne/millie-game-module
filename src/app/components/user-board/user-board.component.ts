@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { User } from '../../User';
 import { UserService } from "../../services/user.service";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-board',
@@ -10,7 +11,7 @@ import { UserService } from "../../services/user.service";
 export class UserBoardComponent implements OnInit {
   user: any = {};
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
     // this.user = JSON.parse(localStorage.getItem('user') || '{}');
@@ -19,4 +20,7 @@ export class UserBoardComponent implements OnInit {
     });
   }
 
+  openAdminDashboard() {
+    this.router.navigate(['/dashboard-home']);
+  }
 }

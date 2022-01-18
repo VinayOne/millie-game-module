@@ -15,8 +15,8 @@ export class GameAreaComponent implements OnInit {
     _id: "",
     name: "",
     seasonName: "",
-    startDate: {},
-    endDate: {},
+    startDate: "",
+    endDate: "",
     levels: [{
       alchemerLink: "",
       millies: 0,

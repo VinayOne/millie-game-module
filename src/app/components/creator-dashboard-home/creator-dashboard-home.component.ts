@@ -19,6 +19,10 @@ export class CreatorDashboardHomeComponent implements OnInit {
     });
   }
 
+  onReturn() {
+    this.router.navigate(['']);
+  }
+
   onCreateNewGame() {
     this.router.navigate(['/dashboard']);
   }

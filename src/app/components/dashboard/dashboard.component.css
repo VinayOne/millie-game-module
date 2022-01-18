@@ -2,4 +2,15 @@
 	background-color: #151146;
 	color: #E8F9FA;
 	padding-bottom: 10px;
+	position: absolute;
+	left: 12.5vw;
+	top:  0px;
+	z-index: 10000;
+}
+
+@media only screen and (max-width: 992px) {
+	.container {
+		width: 100vw;
+		left: 0px;
+	}
 }

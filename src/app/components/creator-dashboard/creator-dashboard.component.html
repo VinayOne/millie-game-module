@@ -20,7 +20,7 @@
 	  	<div id="datesLabel">What are the start date and end date for this season?</div>
 	  	<div class="form-group">
 	  		<div class="input-group">
-	  			<input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="game.startDate" ngbDatepicker #s="ngbDatepicker">
+	  			<input class="form-control" placeholder="yyyy-mm-dd" name="startDate" [(ngModel)]="game.startDate" ngbDatepicker #s="ngbDatepicker">
 		      	<div class="input-group-append">
 		        	<button class="btn btn-outline-secondary" (click)="s.toggle()" type="button">
 		        		<fa-icon [icon]="faCalendar"></fa-icon>
@@ -30,7 +30,7 @@
 	  	</div>
 	  	<div class="form-group">
 	  		<div class="input-group">
-	  			<input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="game.endDate" ngbDatepicker #e="ngbDatepicker">
+	  			<input class="form-control" placeholder="yyyy-mm-dd" name="endDate" [(ngModel)]="game.endDate" ngbDatepicker #e="ngbDatepicker">
 		      	<div class="input-group-append">
 		        	<button class="btn btn-outline-secondary" (click)="e.toggle()" type="button">
 		        		<fa-icon [icon]="faCalendar"></fa-icon>
@@ -43,7 +43,7 @@
 		    	<div class="input-group-prepend">
 		        	<div class="input-group-text" id="numOfLevelsLabel">How many levels will this quest have?</div>
 		    	</div>
-		    	<input type="number" min="1" class="form-control col-lg-2 text-center" [(ngModel)]="numOfLevels" name="numOfLevels">
+		    	<input type="number" min="1" onKeyDown="return false" class="form-control col-lg-2 text-center" [(ngModel)]="numOfLevels" name="numOfLevels" (change)="updateLevelsArray()">
 		    </div>
 	  	</div>
 	  	<div *ngFor="let level of [].constructor(numOfLevels); let i = index">
