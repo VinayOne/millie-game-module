@@ -43,6 +43,28 @@ router.post("/login", (req, res) => {
 	});
 });
 
+router.get("/user-detail", async (req, res) => {
+	var axios = require('axios');
+	var data = '';
+
+	var config = {
+	  method: 'get',
+	  url: 'http://18.118.169.0:5000/api/v1/user/game/user-detail',
+	  headers: { 
+	    'accessToken': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm9maWxlSWQiOiI2MWRiYzQ2Yjk5MWM4OTQ3MjczMTc4ZWQiLCJleHBpcmVzSW4iOiIzMGQiLCJwcm9maWxlVHlwZSI6ImdhbWUiLCJpYXQiOjE2NDIwODI3MzMsImV4cCI6MTY0NDY3NDczM30.a4jYo1TUFqjiDuDu5vS2SZ-4iaOZgV_oD43oH4tboPw'
+	  },
+	  data : data
+	};
+
+	axios(config)
+	.then(function (response) {
+	  res.status(200).send(JSON.stringify(response.data));
+	})
+	.catch(function (error) {
+	  res.status(404).send(error);
+	});
+});
+
 router.get("/users/:username", async (req, res) => {
 	const user = await User.findOne({ username: req.params.username });
 	res.status(200).send(user);

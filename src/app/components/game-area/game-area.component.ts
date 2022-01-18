@@ -12,6 +12,7 @@ export class GameAreaComponent implements OnInit {
   answers: String[] = ["red", "blue", "yellow", "green"];
 
   game: Game = {
+    _id: "",
     name: "",
     seasonName: "",
     startDate: {},
@@ -36,9 +37,7 @@ export class GameAreaComponent implements OnInit {
   constructor(private gameService: GameService) { }
 
   ngOnInit(): void {
-    this.gameService.getGame().subscribe(game => {
-      this.game = game;
-    });
+    this.gameService.getGame().subscribe(game => this.game = game, err => console.log(err));
   }
 
   ngAfterContentChecked() {

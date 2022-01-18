@@ -26,6 +26,10 @@ export class UserService {
     return this.http.get<User>(this.apiUrl + `/${username}`, httpOptions);
   }
 
+  getUserDetail(): Observable<any> {
+    return this.http.get<any>("/api/user-detail", httpOptions);
+  }
+
   loginUser(user: any) {
     return this.http.post<any>("/api/login", user, httpOptions);
   }

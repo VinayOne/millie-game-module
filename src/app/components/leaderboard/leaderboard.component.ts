@@ -11,20 +11,24 @@ import {NgbModal, ModalDismissReasons, NgbModalOptions} from '@ng-bootstrap/ng-b
 
 export class LeaderboardComponent implements OnInit {
   @Input() users: User[] = [];
-  user: User = { image: "", username: "", millies: 0, interests: [] };
+  user: any = {};
   interests: string[] = [];
-  interest: string = "Hiking";
+  interest: string = "";
   showLeaderboard: boolean = true;
   modalOptions: NgbModalOptions = {};
 
   constructor(private userService: UserService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
+    this.userService.getUserDetail().subscribe((userDetail) => {
+      this.user = userDetail.data.result;
+
+      this.user.interests.forEach((interest: any) => this.interests.push(interest.title));
+
+      this.interest = this.interests[0];
+    });
+
     this.userService.getUsers().subscribe((users) => {
-      this.user = users.filter(user => user.username == "scottie11")[0];
-
-      this.interests = this.user.interests;
-
       users = users.filter(user => user.interests.some(interest => this.interest.toLowerCase() == interest));
 
       users.sort((userA, userB) => userB.millies - userA.millies);

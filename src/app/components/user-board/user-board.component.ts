@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { User } from '../../User';
+import { UserService } from "../../services/user.service";
 
 @Component({
   selector: 'app-user-board',
@@ -7,12 +8,15 @@ import { User } from '../../User';
   styleUrls: ['./user-board.component.css']
 })
 export class UserBoardComponent implements OnInit {
-  user: User = { image: "", username: "", millies: 0, interests: [] };
+  user: any = {};
 
-  constructor() { }
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
-    this.user = JSON.parse(localStorage.getItem('user') || '{}');
+    // this.user = JSON.parse(localStorage.getItem('user') || '{}');
+    this.userService.getUserDetail().subscribe((userDetail: any) => {
+      this.user = userDetail.data.result;
+    });
   }
 
 }
