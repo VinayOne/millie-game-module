@@ -17,7 +17,7 @@ export class CreatorDashboardComponent implements OnInit {
   startDate: NgbDateStruct = { year: 0, month: 0, day: 0 };
   endDate: NgbDateStruct = { year: 0, month: 0, day: 0 };
   numOfLevels: number = 1;
-  numOfRewards: number = 0;
+  numOfAwards: number = 0;
 
   game: Game = {
     name: "",
@@ -45,6 +45,8 @@ export class CreatorDashboardComponent implements OnInit {
       this.gameService.getGameById(this._id)
         .subscribe(res => {
             // start = `${req.body.startDate.year}-${req.body.startDate.month}-${req.body.startDate.day}`;
+            this.numOfLevels = res.levels.length;
+
             this.game.name = res.name;
             this.game.seasonName = res.seasonName;
             this.game.startDate = new Date(res.startDate.substring(0, 10));
@@ -73,7 +75,7 @@ export class CreatorDashboardComponent implements OnInit {
   updateLevelsArray() {
     if (this.numOfLevels > this.game.levels.length)
       this.game.levels.push({
-        alchemerLink: "",
+        alchemerLink: "test",
         millies: 0,
         imageLink: "",
         constructLink: "",
@@ -84,6 +86,8 @@ export class CreatorDashboardComponent implements OnInit {
       });
     else
       this.game.levels.pop();
+
+    console.log(this.game.levels);
   }
 
   setGame(levelIndex: number) {
@@ -91,9 +95,10 @@ export class CreatorDashboardComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.activatedRoute.snapshot.paramMap.get('id'))
-      this.gameService.updateGame(this.game)
+    if (this.activatedRoute.snapshot.paramMap.get('id')) {
+      this.gameService.updateGame(this._id, this.game)
         .subscribe(res => console.log("Game object updated"), err => console.log(err));
+    }
     else
       this.gameService.createGame(this.game)
         .subscribe(res => console.log("Game object added to the db"), err => console.log(err));

@@ -1,5 +1,5 @@
 export interface Game {
-	_id?: String,
+	_id?: any,
 	name: String,
 	seasonName: String,
 	startDate: any,

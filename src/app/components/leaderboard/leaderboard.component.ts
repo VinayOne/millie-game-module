@@ -14,7 +14,7 @@ export class LeaderboardComponent implements OnInit {
   user: any = {};
   interests: string[] = [];
   interest: string = "";
-  showLeaderboard: boolean = true;
+  showLeaderboard: boolean = false;
   modalOptions: NgbModalOptions = {};
 
   constructor(private userService: UserService, private modalService: NgbModal) { }

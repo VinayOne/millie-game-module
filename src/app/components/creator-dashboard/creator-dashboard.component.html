@@ -46,33 +46,33 @@
 		    	<input type="number" min="1" onKeyDown="return false" class="form-control col-lg-2 text-center" [(ngModel)]="numOfLevels" name="numOfLevels" (change)="updateLevelsArray()">
 		    </div>
 	  	</div>
-	  	<div *ngFor="let level of [].constructor(numOfLevels); let i = index">
+	  	<div *ngFor="let level of game.levels; let i = index">
 			<h3>Level {{i + 1}}</h3>
 		  	<div class="form-group">
 			    <div class="input-group mb-2">
 			    	<div class="input-group-prepend">
 			        	<div class="input-group-text" id="alchemerLinkLabel">What is the Alchemer link for the quiz questions?</div>
 			    	</div>
-			    	<input type="form-text" class="form-control text-center" [(ngModel)]="game.levels[i].alchemerLink" name="alchemerLink">
+			    	<input type="form-text" class="form-control text-center" [(ngModel)]="level.alchemerLink" name="alchemerLink">
 			    </div>
 		  	</div>
 			<div class="form-group">
 			    <div class="input-group mb-2">
 			    	<div class="input-group-prepend">
-			        	<div class="input-group-text" id="amountOfMilliesLabel">How many Millies will be awarded per question?</div>
+			        	<div class="input-group-text" id="amountOfMilliesLabel">How many Millis will be awarded per question?</div>
 			    	</div>
-			    	<input type="number" min="0" class="form-control col-lg-2 text-center" [(ngModel)]="game.levels[i].millies" name="millies">
+			    	<input type="number" min="0" class="form-control col-lg-2 text-center" [(ngModel)]="level.millies" name="millies">
 			    </div>
 		  	</div>
 		  	<div class="form-group">
 			    <div class="input-group mb-2">
 			    	<div class="input-group-prepend">
-			        	<div class="input-group-text" id="numOfRewardsLabel">How many other rewards will this level have?</div>
+			        	<div class="input-group-text" id="numOfAwardsLabel">How many other awards will this level have?</div>
 			    	</div>
-			    	<input type="number" min="0" class="form-control col-lg-2 text-center" [(ngModel)]="numOfRewards" name="numOfRewards">
+			    	<input type="number" min="0" class="form-control col-lg-2 text-center" [(ngModel)]="numOfAwards" name="numOfAwards">
 			    </div>
 		  	</div>
-		  	<div class="card rounded-0 mb-3" *ngFor="let question of [].constructor(numOfRewards); let j = index">
+		  	<div class="card rounded-0 mb-3" *ngFor="let question of [].constructor(numOfAwards); let j = index">
 				<div class="card-header">
 					<h3 class="mb-0">
 						<label for="award">Award {{j + 1}}</label>
@@ -81,15 +81,15 @@
 				<div class="card-body">
 					<div class="input-group mb-2">
 				    	<div class="input-group-prepend">
-				        	<div class="input-group-text" id="rewardsNameLabel">What is the name for this award?</div>
+				        	<div class="input-group-text" id="AwardsNameLabel">What is the name for this award?</div>
 				    	</div>
-				    	<input type="text" class="form-control" [(ngModel)]="game.levels[i].rewards[j].name" name="awardName">
+				    	<input type="text" class="form-control" [(ngModel)]="level.rewards[j].name" name="awardName">
 				    </div>
 				    <div class="input-group mb-2">
 				    	<div class="input-group-prepend">
-				        	<div class="input-group-text" id="rewardsNameLabel">What is the image link for this award?</div>
+				        	<div class="input-group-text" id="AwardsNameLabel">What is the image link for this award?</div>
 				    	</div>
-				    	<input type="text" class="form-control" [(ngModel)]="game.levels[i].rewards[j].imageLink" name="imageLink">
+				    	<input type="text" class="form-control" [(ngModel)]="level.rewards[j].imageLink" name="imageLink">
 				    </div>
 				</div>
 			</div>
@@ -98,16 +98,16 @@
 			    	<div class="input-group-prepend">
 			        	<div class="input-group-text" id="imageLinkLabel">What is the image link for the spot the difference game?</div>
 			    	</div>
-			    	<input type="form-text" class="form-control text-center" [(ngModel)]="game.levels[i].imageLink" name="imageLink">
+			    	<input type="form-text" class="form-control text-center" [(ngModel)]="level.imageLink" name="imageLink">
 			    </div>
 		  	</div>
 		  	<div class="form-group dropdown">
 		  		<div id="constructLinkLabel">Which Construct game will this level use?</div>
 				<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					{{game.levels[i].constructLink || "No game selected"}}
+					{{level.constructLink || "No game selected"}}
 				</button>
 				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-					<a class="dropdown-item form-control" value="Water Sort" name="game.levels[i].constructLink" (click)="setGame(i)">Water Sort</a>
+					<a class="dropdown-item form-control" value="Water Sort" name="level.constructLink" (click)="setGame(i)">Water Sort</a>
 				</div>
 			</div>
 		</div>

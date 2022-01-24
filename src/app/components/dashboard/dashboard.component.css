@@ -8,7 +8,7 @@
 	z-index: 10000;
 }
 
-@media only screen and (max-width: 992px) {
+@media only screen and (max-width: 768px) {
 	.container {
 		width: 100vw;
 		left: 0px;

@@ -1,7 +1,7 @@
 .container {
 	background-color: #D0E7F5;
 	position: fixed;
-	top: 191px;
+	top: 176px;
 	left: 12.5vw;
 }
 
@@ -11,10 +11,10 @@
 }
 
 #gameArea {
-	height: calc(100vh - 191px);
+	height: calc(100vh - 176px);
 }
 
-@media only screen and (max-width: 992px) {
+@media only screen and (max-width: 768px) {
 	.container {
 		width: 100vw;
 		left: 0px;

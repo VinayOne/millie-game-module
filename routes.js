@@ -79,6 +79,8 @@ router.get("/users", async (req, res) => {
 });
 
 router.get("/game/:id", async (req, res) => {
+	console.log('getting game');
+
 	Game.findById(req.params.id, async (error, game) => {
 		if (error)
 			console.log(error);
@@ -99,6 +101,8 @@ router.get("/games", async (req, res) => {
 router.put("/game/:id", async (req, res) => {
 	start = `${req.body.startDate.year}-${req.body.startDate.month}-${req.body.startDate.day}`;
 	end = `${req.body.endDate.year}-${req.body.endDate.month}-${req.body.endDate.day}`;
+
+	console.log(req.body);
 
 	const game = await Game.findByIdAndUpdate(req.params.id, {
 		name: req.body.name,
