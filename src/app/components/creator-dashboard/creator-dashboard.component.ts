@@ -16,7 +16,7 @@ export class CreatorDashboardComponent implements OnInit {
   faCalendar: any = faCalendar;
   startDate: NgbDateStruct = { year: 0, month: 0, day: 0 };
   endDate: NgbDateStruct = { year: 0, month: 0, day: 0 };
-  numOfLevels: number = 1;
+  numOfLevels: number = 3;
   numOfRewards: number = 0;
 
   game: Game = {
@@ -24,9 +24,30 @@ export class CreatorDashboardComponent implements OnInit {
     seasonName: "",
     startDate: this.startDate,
     endDate: this.endDate,
-    levels: [{
+    levels: [
+    {
       alchemerLink: "",
-      millies: 0,
+      millies: 10,
+      imageLink: "",
+      constructLink: "",
+      rewards: [{
+        name: "",
+        imageLink: ""
+      }]
+    },
+    {
+      alchemerLink: "",
+      millies: 5,
+      imageLink: "",
+      constructLink: "",
+      rewards: [{
+        name: "",
+        imageLink: ""
+      }]
+    },
+    {
+      alchemerLink: "",
+      millies: 7,
       imageLink: "",
       constructLink: "",
       rewards: [{
@@ -49,7 +70,7 @@ export class CreatorDashboardComponent implements OnInit {
             this.game.seasonName = res.seasonName;
             this.game.startDate = new Date(res.startDate.substring(0, 10));
             this.game.endDate = new Date(res.endDate.substring(0, 10));
-            this.game.levels = res.levels;
+            // this.game.levels = res.levels;
 
             // this.game.startDate = {
             //   year: res.startDate.substring(0, 4),
@@ -65,6 +86,7 @@ export class CreatorDashboardComponent implements OnInit {
 
             console.log(this.game.startDate);
             console.log(this.game.endDate);
+            console.log(this.game.levels);
 
           }, err => console.log(err));      
     }
