@@ -1,0 +1,54 @@
+<h3>Level {{index + 1}}</h3>
+<div class="form-group">
+	<div class="input-group mb-2">
+		<div class="input-group-prepend">
+			<div class="input-group-text" id="alchemerLinkLabel">What is the Alchemer link for the quiz questions?</div>
+		</div>
+		<input type="form-text" class="form-control text-center" [(ngModel)]="level.alchemerLink" name="alchemerLink">
+	</div>
+</div>
+<div class="form-group">
+	<div class="input-group mb-2">
+		<div class="input-group-prepend">
+			<div class="input-group-text" id="amountOfMillisLabel">How many Millis will be awarded per question?</div>
+		</div>
+		<input type="number" min="0" class="form-control col-lg-2 text-center" [(ngModel)]="level.millis" name="millis">
+	</div>
+</div>
+<div class="form-group">
+	<div class="input-group mb-2">
+		<div class="input-group-prepend">
+			<div class="input-group-text" id="numOfAwardsLabel">How many other awards will this level have?</div>
+		</div>
+		<input type="number" min="0" class="form-control col-lg-2 text-center" [(ngModel)]="numOfAwards" name="numOfAwards">
+	</div>
+</div>
+<div class="card rounded-0 mb-3" *ngFor="let question of [].constructor(numOfAwards); let j = index">
+	<div class="card-header">
+		<h3 class="mb-0">
+			<label for="award">Award {{j + 1}}</label>
+		</h3>
+	</div>
+	<div class="card-body">
+		<div class="input-group mb-2">
+			<div class="input-group-prepend">
+				<div class="input-group-text" id="AwardsNameLabel">What is the name for this award?</div>
+			</div>
+			<input type="text" class="form-control" [(ngModel)]="level.awards[j].name" name="awardName">
+		</div>
+		<div class="input-group mb-2">
+			<div class="input-group-prepend">
+				<div class="input-group-text" id="AwardsNameLabel">What is the image link for this award?</div>
+			</div>
+			<input type="text" class="form-control" [(ngModel)]="level.awards[j].imageLink" name="imageLink">
+		</div>
+	</div>
+</div>
+<div class="form-group">
+	<div class="input-group mb-2">
+		<div class="input-group-prepend">
+			<div class="input-group-text" id="imageLinkLabel">What is the image link for the spot the difference game?</div>
+		</div>
+		<input type="form-text" class="form-control text-center" [(ngModel)]="level.imageLink" name="imageLink">
+	</div>
+</div>

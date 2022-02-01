@@ -79,8 +79,6 @@ router.get("/users", async (req, res) => {
 });
 
 router.get("/game/:id", async (req, res) => {
-	console.log('getting game');
-
 	Game.findById(req.params.id, async (error, game) => {
 		if (error)
 			console.log(error);

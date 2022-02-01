@@ -14,7 +14,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { InfographicComponent } from './components/infographic/infographic.component';
 import { ItemsComponent } from './components/items/items.component';
 import { ItemComponent } from './components/item/item.component';
-import { MilliesThisQuestComponent } from './components/millies-this-quest/millies-this-quest.component';
+import { MillisThisQuestComponent } from './components/millis-this-quest/millis-this-quest.component';
 import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
 import { GameAreaComponent } from './components/game-area/game-area.component';
 import { LoginComponent } from './components/login/login.component';
@@ -22,6 +22,7 @@ import { ContentAreaComponent } from './components/content-area/content-area.com
 import { UserBoardComponent } from './components/user-board/user-board.component';
 import { CreatorDashboardComponent } from './components/creator-dashboard/creator-dashboard.component';
 import { CreatorDashboardHomeComponent } from './components/creator-dashboard-home/creator-dashboard-home.component';
+import { LevelComponent } from './components/level/level.component';
 
 @NgModule({
   declarations: [
@@ -33,14 +34,15 @@ import { CreatorDashboardHomeComponent } from './components/creator-dashboard-ho
     InfographicComponent,
     ItemsComponent,
     ItemComponent,
-    MilliesThisQuestComponent,
+    MillisThisQuestComponent,
     ProgressBarComponent,
     GameAreaComponent,
     LoginComponent,
     ContentAreaComponent,
     UserBoardComponent,
     CreatorDashboardComponent,
-    CreatorDashboardHomeComponent
+    CreatorDashboardHomeComponent,
+    LevelComponent
   ],
   imports: [
     BrowserModule,

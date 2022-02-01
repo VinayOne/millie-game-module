@@ -8,7 +8,7 @@ import { UserService } from "../../services/user.service";
   styleUrls: ['./info-board.component.css']
 })
 export class InfoBoardComponent implements OnInit {
-  user: User = { image: "", username: "", millies: 0, interests: [] };
+  user: User = { image: "", username: "", millis: 0, interests: [] };
   showInfoboard: boolean = false;
 
   constructor(private userService: UserService) { }

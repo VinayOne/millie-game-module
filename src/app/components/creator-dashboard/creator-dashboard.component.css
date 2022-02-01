@@ -1,4 +1,4 @@
-#numOfQuestionsLabel, #numOfAwardsLabel, #amountOfMilliesLabel, #imageLinkLabel, #alchemerLinkLabel {
+#numOfQuestionsLabel, #numOfLevelsLabel, #nameLabel, #seasonNameLabel {
 	background-color: #EC56A3;
 	color: #E8F9FA;
 }
@@ -9,11 +9,6 @@
 
 #submitButton {
 	background-color: #151146;
-	color: #E8F9FA;
-}
-
-#numOfLevelsLabel, #nameLabel, #seasonNameLabel {
-	background-color: #EC56A3;
 	color: #E8F9FA;
 }
 

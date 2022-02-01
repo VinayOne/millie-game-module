@@ -31,7 +31,7 @@ export class LeaderboardComponent implements OnInit {
     this.userService.getUsers().subscribe((users) => {
       users = users.filter(user => user.interests.some(interest => this.interest.toLowerCase() == interest));
 
-      users.sort((userA, userB) => userB.millies - userA.millies);
+      users.sort((userA, userB) => userB.millis - userA.millis);
 
       users.forEach((user, index) => user.rank = index + 1);
 

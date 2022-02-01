@@ -14,22 +14,20 @@ export class CreatorDashboardComponent implements OnInit {
   _id: any = {};
 
   faCalendar: any = faCalendar;
-  startDate: NgbDateStruct = { year: 0, month: 0, day: 0 };
-  endDate: NgbDateStruct = { year: 0, month: 0, day: 0 };
-  numOfLevels: number = 1;
+  numOfLevels: number = 2;
   numOfAwards: number = 0;
 
   game: Game = {
     name: "",
     seasonName: "",
-    startDate: this.startDate,
-    endDate: this.endDate,
+    startDate: { year: 0, month: 0, day: 0 },
+    endDate: { year: 0, month: 0, day: 0 },
+    constructLink: "",
     levels: [{
       alchemerLink: "",
-      millies: 0,
+      millis: 0,
       imageLink: "",
-      constructLink: "",
-      rewards: [{
+      awards: [{
         name: "",
         imageLink: ""
       }]
@@ -44,7 +42,6 @@ export class CreatorDashboardComponent implements OnInit {
 
       this.gameService.getGameById(this._id)
         .subscribe(res => {
-            // start = `${req.body.startDate.year}-${req.body.startDate.month}-${req.body.startDate.day}`;
             this.numOfLevels = res.levels.length;
 
             this.game.name = res.name;
@@ -53,20 +50,17 @@ export class CreatorDashboardComponent implements OnInit {
             this.game.endDate = new Date(res.endDate.substring(0, 10));
             this.game.levels = res.levels;
 
-            // this.game.startDate = {
-            //   year: res.startDate.substring(0, 4),
-            //   month: res.startDate.substring(5, 7),
-            //   day: res.startDate.substring(8, 10)
-            // };
+            this.game.startDate = {
+              year: +res.startDate.substring(0, 4),
+              month: +res.startDate.substring(5, 7),
+              day: +res.startDate.substring(8, 10)
+            };
 
-            // this.game.endDate = {
-            //   year: res.endDate.substring(0, 4),
-            //   month: res.endDate.substring(5, 7),
-            //   day: res.endDate.substring(8, 10)
-            // };
-
-            console.log(this.game.startDate);
-            console.log(this.game.endDate);
+            this.game.endDate = {
+              year: +res.endDate.substring(0, 4),
+              month: +res.endDate.substring(5, 7),
+              day: +res.endDate.substring(8, 10)
+            };
 
           }, err => console.log(err));      
     }
@@ -75,23 +69,20 @@ export class CreatorDashboardComponent implements OnInit {
   updateLevelsArray() {
     if (this.numOfLevels > this.game.levels.length)
       this.game.levels.push({
-        alchemerLink: "test",
-        millies: 0,
+        alchemerLink: "",
+        millis: 0,
         imageLink: "",
-        constructLink: "",
-        rewards: [{
+        awards: [{
           name: "",
           imageLink: ""
         }]
       });
     else
       this.game.levels.pop();
-
-    console.log(this.game.levels);
   }
 
-  setGame(levelIndex: number) {
-    this.game.levels[levelIndex].constructLink = "Water Sort";
+  setGame() {
+    this.game.constructLink = "Water Sort";
   }
 
   onSubmit() {

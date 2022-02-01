@@ -5,16 +5,8 @@ const schema = mongoose.Schema({
 	seasonName: String,
 	startDate: Date,
 	endDate: Date,
-	levels: [{
-		alchemerLink: String,
-		millies: Number,
-		imageLink: String,
-		constructLink: String,
-		rewards: [{
-			name: String,
-			imageLink: String
-		}]
-	}]
+	constructLink: String,
+	levels: [Object]
 });
 
 module.exports = mongoose.model("Game", schema);
