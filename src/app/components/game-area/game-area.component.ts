@@ -17,11 +17,12 @@ export class GameAreaComponent implements OnInit {
     seasonName: "",
     startDate: "",
     endDate: "",
+    constructLink: "",
     levels: [{
       alchemerLink: "",
-      millies: 0,
-      imageLink: "", constructLink: "",
-      rewards: [{ name: "", imageLink: "" }]
+      millis: 0,
+      imageLink: "",
+      awards: [{ name: "", imageLink: "" }]
     }]
   };
 
@@ -37,7 +38,7 @@ export class GameAreaComponent implements OnInit {
   constructor(private gameService: GameService) { }
 
   ngOnInit(): void {
-    this.gameService.getGame().subscribe(game => this.game = game, err => console.log(err));
+    this.gameService.getCurrentGame().subscribe(game => this.game = game, err => console.log(err));
   }
 
   ngAfterContentChecked() {

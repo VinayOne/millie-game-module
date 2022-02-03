@@ -6,7 +6,7 @@
 		    	<div class="input-group-prepend">
 		        	<div class="input-group-text" id="nameLabel">What name will this quest have?</div>
 		    	</div>
-		    	<input type="text" class="form-control col-lg-2 text-center" [(ngModel)]="game.name" name="name">
+		    	<input type="text" class="form-control col-lg-2 text-center" [(ngModel)]="game.name" name="name" [ngClass]="{'error': !validState.validName}">
 		    </div>
 	  	</div>
 	  	<div class="form-group">
@@ -14,13 +14,13 @@
 		    	<div class="input-group-prepend">
 		        	<div class="input-group-text" id="seasonNameLabel">What name will this season have?</div>
 		    	</div>
-		    	<input type="text" class="form-control col-lg-2 text-center" [(ngModel)]="game.seasonName" name="seasonName">
+		    	<input type="text" class="form-control col-lg-2 text-center" [(ngModel)]="game.seasonName" name="seasonName" [ngClass]="{'error': !validState.validSeasonName}">
 		    </div>
 	  	</div>
 	  	<div id="datesLabel">What are the start date and end date for this season?</div>
 	  	<div class="form-group">
 	  		<div class="input-group">
-	  			<input class="form-control" placeholder="yyyy-mm-dd" name="startDate" [(ngModel)]="game.startDate" ngbDatepicker #s="ngbDatepicker">
+	  			<input class="form-control" placeholder="yyyy-mm-dd" name="startDate" [(ngModel)]="game.startDate" ngbDatepicker #s="ngbDatepicker" [ngClass]="{'error': !validState.validStartDate}">
 		      	<div class="input-group-append">
 		        	<button class="btn btn-outline-secondary" (click)="s.toggle()" type="button">
 		        		<fa-icon [icon]="faCalendar"></fa-icon>
@@ -30,7 +30,7 @@
 	  	</div>
 	  	<div class="form-group">
 	  		<div class="input-group">
-	  			<input class="form-control" placeholder="yyyy-mm-dd" name="endDate" [(ngModel)]="game.endDate" ngbDatepicker #e="ngbDatepicker">
+	  			<input class="form-control" placeholder="yyyy-mm-dd" name="endDate" [(ngModel)]="game.endDate" ngbDatepicker #e="ngbDatepicker" [ngClass]="{'error': !validState.validEndDate}">
 		      	<div class="input-group-append">
 		        	<button class="btn btn-outline-secondary" (click)="e.toggle()" type="button">
 		        		<fa-icon [icon]="faCalendar"></fa-icon>
@@ -38,6 +38,15 @@
 		      	</div>
 	  		</div>
 	  	</div>
+	  	<div class="form-group dropdown">
+		  		<div id="constructLinkLabel">Which Construct minigame will this game use?</div>
+				<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					{{game.constructLink || "No game selected"}}
+				</button>
+				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+					<a class="dropdown-item form-control" value="Water Sort" name="game.constructLink" (click)="setGame()">Water Sort</a>
+				</div>
+			</div>
 		<div class="form-group">
 		    <div class="input-group mb-2">
 		    	<div class="input-group-prepend">
@@ -46,71 +55,11 @@
 		    	<input type="number" min="1" onKeyDown="return false" class="form-control col-lg-2 text-center" [(ngModel)]="numOfLevels" name="numOfLevels" (change)="updateLevelsArray()">
 		    </div>
 	  	</div>
-	  	<div *ngFor="let level of game.levels; let i = index">
-			<h3>Level {{i + 1}}</h3>
-		  	<div class="form-group">
-			    <div class="input-group mb-2">
-			    	<div class="input-group-prepend">
-			        	<div class="input-group-text" id="alchemerLinkLabel">What is the Alchemer link for the quiz questions?</div>
-			    	</div>
-			    	<input type="form-text" class="form-control text-center" [(ngModel)]="level.alchemerLink" name="alchemerLink">
-			    </div>
-		  	</div>
-			<div class="form-group">
-			    <div class="input-group mb-2">
-			    	<div class="input-group-prepend">
-			        	<div class="input-group-text" id="amountOfMilliesLabel">How many Millies will be awarded per question?</div>
-			    	</div>
-			    	<input type="number" min="0" class="form-control col-lg-2 text-center" [(ngModel)]="level.millies" name="millies">
-			    </div>
-		  	</div>
-		  	<div class="form-group">
-			    <div class="input-group mb-2">
-			    	<div class="input-group-prepend">
-			        	<div class="input-group-text" id="numOfRewardsLabel">How many other rewards will this level have?</div>
-			    	</div>
-			    	<input type="number" min="0" class="form-control col-lg-2 text-center" [(ngModel)]="numOfRewards" name="numOfRewards">
-			    </div>
-		  	</div>
-		  	<div class="card rounded-0 mb-3" *ngFor="let question of [].constructor(numOfRewards); let j = index">
-				<div class="card-header">
-					<h3 class="mb-0">
-						<label for="award">Award {{j + 1}}</label>
-					</h3>
-				</div>
-				<div class="card-body">
-					<div class="input-group mb-2">
-				    	<div class="input-group-prepend">
-				        	<div class="input-group-text" id="rewardsNameLabel">What is the name for this award?</div>
-				    	</div>
-				    	<input type="text" class="form-control" [(ngModel)]="level.rewards[j].name" name="awardName">
-				    </div>
-				    <div class="input-group mb-2">
-				    	<div class="input-group-prepend">
-				        	<div class="input-group-text" id="rewardsNameLabel">What is the image link for this award?</div>
-				    	</div>
-				    	<input type="text" class="form-control" [(ngModel)]="level.rewards[j].imageLink" name="imageLink">
-				    </div>
-				</div>
-			</div>
-		  	<div class="form-group">
-			    <div class="input-group mb-2">
-			    	<div class="input-group-prepend">
-			        	<div class="input-group-text" id="imageLinkLabel">What is the image link for the spot the difference game?</div>
-			    	</div>
-			    	<input type="form-text" class="form-control text-center" [(ngModel)]="level.imageLink" name="imageLink">
-			    </div>
-		  	</div>
-		  	<div class="form-group dropdown">
-		  		<div id="constructLinkLabel">Which Construct game will this level use?</div>
-				<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					{{level.constructLink || "No game selected"}}
-				</button>
-				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-					<a class="dropdown-item form-control" value="Water Sort" name="level.constructLink" (click)="setGame(i)">Water Sort</a>
-				</div>
-			</div>
-		</div>
+		<app-level
+			*ngFor="let level of game.levels; let i = index"
+			[index]="i"
+			[level]="level">
+		</app-level>
 	</form>
 	<div class="row">
 		<div class="col-4">

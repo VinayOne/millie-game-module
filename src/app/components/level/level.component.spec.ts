@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MilliesThisQuestComponent } from './millies-this-quest.component';
+import { LevelComponent } from './level.component';
 
-describe('MilliesThisQuestComponent', () => {
-  let component: MilliesThisQuestComponent;
-  let fixture: ComponentFixture<MilliesThisQuestComponent>;
+describe('LevelComponent', () => {
+  let component: LevelComponent;
+  let fixture: ComponentFixture<LevelComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MilliesThisQuestComponent ]
+      declarations: [ LevelComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MilliesThisQuestComponent);
+    fixture = TestBed.createComponent(LevelComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

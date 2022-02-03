@@ -1,4 +1,4 @@
-#numOfQuestionsLabel, #numOfRewardsLabel, #amountOfMilliesLabel, #imageLinkLabel, #alchemerLinkLabel {
+#numOfQuestionsLabel, #numOfLevelsLabel, #nameLabel, #seasonNameLabel {
 	background-color: #EC56A3;
 	color: #E8F9FA;
 }
@@ -12,11 +12,6 @@
 	color: #E8F9FA;
 }
 
-#numOfLevelsLabel, #nameLabel, #seasonNameLabel {
-	background-color: #EC56A3;
-	color: #E8F9FA;
-}
-
 #datesLabel {
 	color: #EC56A3;
 }
@@ -24,4 +19,8 @@
 button {
 	background-color: #0A52CE;
 	color: #E8F9FA;
+}
+
+.error {
+	border: solid red;
 }

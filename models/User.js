@@ -5,9 +5,9 @@ const schema = mongoose.Schema({
 	image: String,
 	username: String,
 	password: String,
-	millies: Number,
+	millis: Number,
 	interests: [String],
-	millies_this_quest: Number,
+	millis_this_quest: Number,
 	puzzles: Number,
 	keys: Number,
 	items: [String]

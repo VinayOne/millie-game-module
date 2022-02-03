@@ -1,8 +1,9 @@
 export interface Game {
-	_id?: String,
+	_id?: any,
 	name: String,
 	seasonName: String,
 	startDate: any,
 	endDate: any,
-	levels: any
+	constructLink: String,
+	levels: any[]
 }

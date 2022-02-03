@@ -1,0 +1,19 @@
+.card-header {
+	background-color: #EC56A3;
+	color: #E8F9FA;
+}
+
+.edit {
+	background-color: #0A52CE;
+	color: #E8F9FA;
+}
+
+.new {
+	background-color: #85A9E6;
+	color: #E8F9FA;
+}
+
+.return {
+	background-color: #151146;
+	color: #E8F9FA;
+}

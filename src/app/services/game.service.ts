@@ -22,7 +22,7 @@ export class GameService {
   }
 
   // change method name to getCurrentGame
-  getGame() {
+  getCurrentGame() {
     return this.http.get<any>("/api/game/current", httpOptions);
   }
 
@@ -34,8 +34,8 @@ export class GameService {
     return this.http.get<any>("/api/games/", httpOptions);
   }
 
-  updateGame(game: Game) {
-    return this.http.put<any>("/api/game/" + game._id, game, httpOptions);
+  updateGame(_id: String, game: Game) {
+    return this.http.put<any>("/api/game/" + _id, game, httpOptions);
   }
 
   deleteGame(game: Game) {

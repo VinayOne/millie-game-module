@@ -1,9 +1,9 @@
 <button class="container" (click)="toggleInfoboard()"><div [ngClass]="showInfoboard ? 'arrow-up' : 'arrow-down'"></div></button>
 <div *ngIf="showInfoboard" class="row">
-	<app-millies-this-quest
+	<app-millis-this-quest
 		class="col text-center"
-		[millies]="user.millies_this_quest">
-	</app-millies-this-quest>
+		[millis]="user.millis_this_quest">
+	</app-millis-this-quest>
 	<app-infographic
 		class="col text-center"
 		image="https://cdn.pixabay.com/photo/2016/02/23/15/59/puzzle-1217987_960_720.png"

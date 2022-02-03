@@ -78,6 +78,10 @@ router.get("/users", async (req, res) => {
 	res.status(200).send(users);
 });
 
+router.get("/game/current", async(req, res) => {
+	// look up game where current date comes after start date AND current date comes before end date
+});
+
 router.get("/game/:id", async (req, res) => {
 	Game.findById(req.params.id, async (error, game) => {
 		if (error)
@@ -100,11 +104,14 @@ router.put("/game/:id", async (req, res) => {
 	start = `${req.body.startDate.year}-${req.body.startDate.month}-${req.body.startDate.day}`;
 	end = `${req.body.endDate.year}-${req.body.endDate.month}-${req.body.endDate.day}`;
 
+	console.log(req.body);
+
 	const game = await Game.findByIdAndUpdate(req.params.id, {
 		name: req.body.name,
 		seasonName: req.body.seasonName,
 		startDate: start,
 		endDate: end,
+		constructLink: req.body.constructLink,
 		levels: req.body.levels
 	});
 	res.status(200).send(game);
@@ -119,6 +126,7 @@ router.post("/game", async (req, res) => {
 		seasonName: req.body.seasonName,
 		startDate: start,
 		endDate: end,
+		constructLink: req.body.constructLink,
 		levels: req.body.levels
 	});
 

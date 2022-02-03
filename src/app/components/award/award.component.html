@@ -1,0 +1,21 @@
+<div class="card rounded-0 mb-3">
+	<div class="card-header">
+		<h3 class="mb-0">
+			<label for="award">Award {{index + 1}}</label>
+		</h3>
+	</div>
+	<div class="card-body">
+		<div class="input-group mb-2">
+			<div class="input-group-prepend">
+				<div class="input-group-text" id="awardsNameLabel">What is the name for this award?</div>
+			</div>
+			<input type="text" class="form-control" [(ngModel)]="award.name" name="awardName">
+		</div>
+		<div class="input-group mb-2">
+			<div class="input-group-prepend">
+				<div class="input-group-text" id="awardsImageLinkLabel">What is the image link for this award?</div>
+			</div>
+			<input type="text" class="form-control" [(ngModel)]="award.imageLink" name="imageLink">
+		</div>
+	</div>
+</div>
