@@ -51,6 +51,10 @@ export class CreatorDashboardComponent implements OnInit {
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private gameService: GameService) { }
 
   ngOnInit(): void {
+    this.gameService.getGames().subscribe((games) => {
+      this.games = games;
+    });
+
     if (this.activatedRoute.snapshot.paramMap.get('id')) {
       this._id = this.activatedRoute.snapshot.paramMap?.get('id');
 
@@ -115,6 +119,44 @@ export class CreatorDashboardComponent implements OnInit {
   }
 
   compareDates(firstDate: any, secondDate: any) {
+    if (typeof firstDate === "string") {
+      if (Number(firstDate.substring(0, 4)) < secondDate.year)
+        return -1;
+      else if (Number(firstDate.substring(0, 4)) > secondDate.year)
+        return 1;
+
+      if (Number(firstDate.substring(5, 7)) < secondDate.month)
+        return -1;
+      else if (Number(firstDate.substring(5, 7)) > secondDate.month)
+        return 1;
+
+      if (Number(firstDate.substring(8, 10)) < secondDate.day)
+        return -1;
+      else if (Number(firstDate.substring(8, 10)) > secondDate.day)
+        return 1;
+
+      return 0;
+    }
+
+    if (typeof secondDate === "string") {
+      if (firstDate.year < Number(secondDate.substring(0, 4)))
+        return -1;
+      else if (firstDate.year > Number(secondDate.substring(0, 4)))
+        return 1;
+
+      if (firstDate.month < Number(secondDate.substring(5, 7)))
+        return -1;
+      else if (firstDate.month > Number(secondDate.substring(5, 7)))
+        return 1;
+
+      if (firstDate.day < Number(secondDate.substring(8, 10)))
+        return -1;
+      else if (firstDate.day > Number(secondDate.substring(8, 10)))
+        return 1;
+
+      return 0;
+    }
+
     if (firstDate.year < secondDate.year)
       return -1;
     else if (firstDate.year > secondDate.year)
@@ -145,8 +187,8 @@ export class CreatorDashboardComponent implements OnInit {
       this.compareDates(this.game.startDate, this.game.endDate) < 0;
 
     for (let otherGame of this.games) {
-      this.validState.validDatesForAllGames = this.compareDates(otherGame.endDate, this.game.startDate) < 0 ||
-        this.compareDates(this.game.endDate, otherGame.startDate);
+      this.validState.validDatesForAllGames = this.compareDates(this.game.endDate, otherGame.startDate) < 0 ||
+        this.compareDates(otherGame.endDate, this.game.startDate) < 0;
     }
 
     this.validState.validConstructLink = this.game.constructLink !== "";
