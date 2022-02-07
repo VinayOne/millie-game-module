@@ -24,3 +24,7 @@ button {
 .error {
 	border: solid red;
 }
+
+p {
+	color: red;
+}

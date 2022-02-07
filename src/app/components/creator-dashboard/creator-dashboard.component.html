@@ -6,7 +6,10 @@
 		    	<div class="input-group-prepend">
 		        	<div class="input-group-text" id="nameLabel">What name will this quest have?</div>
 		    	</div>
-		    	<input type="text" class="form-control col-lg-2 text-center" [(ngModel)]="game.name" name="name" [ngClass]="{'error': !validState.validName}">
+		    	<input type="text" class="form-control col-lg-2 text-center" [(ngModel)]="game.name" name="name" [ngClass]="{'error': !validState.validName}">	
+		    </div>
+		    <div class="d-block" *ngIf="!validState.validName">
+		    	<p>Please enter a name.</p>
 		    </div>
 	  	</div>
 	  	<div class="form-group">
@@ -16,37 +19,55 @@
 		    	</div>
 		    	<input type="text" class="form-control col-lg-2 text-center" [(ngModel)]="game.seasonName" name="seasonName" [ngClass]="{'error': !validState.validSeasonName}">
 		    </div>
+		    <div class="d-block" *ngIf="!validState.validSeasonName">
+		    	<p>Please enter a season name.</p>
+		    </div>
 	  	</div>
 	  	<div id="datesLabel">What are the start date and end date for this season?</div>
 	  	<div class="form-group">
 	  		<div class="input-group">
-	  			<input class="form-control" placeholder="yyyy-mm-dd" name="startDate" [(ngModel)]="game.startDate" ngbDatepicker #s="ngbDatepicker" [ngClass]="{'error': !validState.validStartDate}">
+	  			<input class="form-control" placeholder="yyyy-mm-dd" name="startDate" [(ngModel)]="game.startDate" ngbDatepicker #s="ngbDatepicker" [ngClass]="{'error': !validState.validStartDate || !validState.validDatesForGame}">
 		      	<div class="input-group-append">
 		        	<button class="btn btn-outline-secondary" (click)="s.toggle()" type="button">
 		        		<fa-icon [icon]="faCalendar"></fa-icon>
 		        	</button>
 		      	</div>
 	  		</div>
+	  		<div class="d-block" *ngIf="!validState.validStartDate">
+		    	<p>Please enter a start date.</p>
+		    </div>
+		    <div class="d-block" *ngIf="validState.validStartDate && validState.validEndDate && !validState.validDatesForGame">
+		    	<p>Please enter a start date that comes before the end date.</p>
+		    </div>
 	  	</div>
 	  	<div class="form-group">
 	  		<div class="input-group">
-	  			<input class="form-control" placeholder="yyyy-mm-dd" name="endDate" [(ngModel)]="game.endDate" ngbDatepicker #e="ngbDatepicker" [ngClass]="{'error': !validState.validEndDate}">
+	  			<input class="form-control" placeholder="yyyy-mm-dd" name="endDate" [(ngModel)]="game.endDate" ngbDatepicker #e="ngbDatepicker" [ngClass]="{'error': !validState.validEndDate || !validState.validDatesForGame}">
 		      	<div class="input-group-append">
 		        	<button class="btn btn-outline-secondary" (click)="e.toggle()" type="button">
 		        		<fa-icon [icon]="faCalendar"></fa-icon>
 		        	</button>
 		      	</div>
 	  		</div>
+	  		<div class="d-block" *ngIf="!validState.validEndDate">
+		    	<p>Please enter an end date.</p>
+		    </div>
+		    <div class="d-block" *ngIf="validState.validStartDate && validState.validEndDate && !validState.validDatesForGame">
+		    	<p>Please enter an end date that comes after the start date.</p>
+		    </div>
 	  	</div>
 	  	<div class="form-group dropdown">
-		  		<div id="constructLinkLabel">Which Construct minigame will this game use?</div>
-				<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					{{game.constructLink || "No game selected"}}
-				</button>
-				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-					<a class="dropdown-item form-control" value="Water Sort" name="game.constructLink" (click)="setGame()">Water Sort</a>
-				</div>
+		  	<div id="constructLinkLabel">Which Construct minigame will this game use?</div>
+			<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" [ngClass]="{'error': !validState.validConstructLink}">
+				{{game.constructLink || "No game selected"}}
+			</button>
+			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+				<a class="dropdown-item form-control" value="Water Sort" name="game.constructLink" (click)="setGame()">Water Sort</a>
 			</div>
+		</div>
+		<div class="d-block" *ngIf="!validState.validConstructLink">
+		    <p>Please select a Construct minigame.</p>
+		</div>
 		<div class="form-group">
 		    <div class="input-group mb-2">
 		    	<div class="input-group-prepend">
@@ -58,7 +79,8 @@
 		<app-level
 			*ngFor="let level of game.levels; let i = index"
 			[index]="i"
-			[level]="level">
+			[level]="level"
+			[validState]="validState.validLevels[i]">
 		</app-level>
 	</form>
 	<div class="row">

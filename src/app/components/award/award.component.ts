@@ -8,6 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class AwardComponent implements OnInit {
   @Input() index: number = 0;
   @Input() award: any = {};
+  @Input() validState: any = {};
 
   constructor() { }
 

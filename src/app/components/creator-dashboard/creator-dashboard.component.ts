@@ -16,6 +16,8 @@ export class CreatorDashboardComponent implements OnInit {
   faCalendar: any = faCalendar;
   numOfLevels: number = 1;
 
+  games: Game[] = [];
+
   game: Game = {
     name: "",
     seasonName: "",
@@ -35,8 +37,15 @@ export class CreatorDashboardComponent implements OnInit {
     validSeasonName: true,
     validStartDate: true,
     validEndDate: true,
+    validDatesForGame: true,
+    validDatesForAllGames: true,
     validConstructLink: true,
-    validLevels: true
+    validLevels: [{
+      validAlchemerLink: true,
+      validMillis: true,
+      validImageLink: true,
+      validAwards: []
+    }]
   }
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private gameService: GameService) { }
@@ -68,73 +77,108 @@ export class CreatorDashboardComponent implements OnInit {
               day: +res.endDate.substring(8, 10)
             };
 
+            this.validState.validLevels = Array(this.numOfLevels).fill({
+              validAlchemerLink: true,
+              validMillis: true,
+              validImageLink: true,
+              validAwards: []
+            });
+
           }, err => console.log(err));      
     }
   }
 
   updateLevelsArray() {
-    if (this.numOfLevels > this.game.levels.length)
+    if (this.numOfLevels > this.game.levels.length) {
       this.game.levels.push({
         alchemerLink: "",
         millis: 0,
         imageLink: "",
         awards: []
       });
-    else
+
+      this.validState.validLevels.push({
+        validAlchemerLink: true,
+        validMillis: true,
+        validImageLink: true,
+        validAwards: []
+      });
+    }
+    else {
       this.game.levels.pop();
+      this.validState.validLevels.pop();
+    }
   }
 
   setGame() {
     this.game.constructLink = "Water Sort";
   }
 
+  compareDates(firstDate: any, secondDate: any) {
+    if (firstDate.year < secondDate.year)
+      return -1;
+    else if (firstDate.year > secondDate.year)
+      return 1;
+
+    if (firstDate.month < secondDate.month)
+      return -1;
+    else if (firstDate.month > secondDate.month)
+      return 1;
+
+    if (firstDate.day < secondDate.day)
+      return -1;
+    else if (firstDate.day > secondDate.day)
+      return 1;
+
+    return 0;
+  }
+
   validate(): boolean {
-    if (this.game.name === "")
-      this.validState.validName = false;
-    else
-      this.validState.validName = true;
+    this.validState.validName = this.game.name !== "";
+    this.validState.validSeasonName = this.game.seasonName !== "";
+    this.validState.validStartDate = this.game.startDate && this.game.startDate.year &&
+      this.game.startDate.month && this.game.startDate.day;
+    this.validState.validEndDate = this.game.endDate && this.game.endDate.year &&
+      this.game.endDate.month && this.game.endDate.day;
 
-    if (this.game.seasonName === "")
-      this.validState.validSeasonName = false;
-    else
-      this.validState.validSeasonName = true;
+    this.validState.validDatesForGame = this.validState.validStartDate && this.validState.validEndDate &&
+      this.compareDates(this.game.startDate, this.game.endDate) < 0;
 
-    if (!this.game.startDate || !this.game.startDate.year || !this.game.startDate.month || !this.game.startDate.day )
-      this.validState.validStartDate = false;
-    else
-      this.validState.validStartDate = true;
+    for (let otherGame of this.games) {
+      this.validState.validDatesForAllGames = this.compareDates(otherGame.endDate, this.game.startDate) < 0 ||
+        this.compareDates(this.game.endDate, otherGame.startDate);
+    }
 
-    if (!this.game.endDate || !this.game.endDate.year || !this.game.endDate.month || !this.game.endDate.day )
-      this.validState.validEndDate = false;
-    else
-      this.validState.validEndDate = true;
+    this.validState.validConstructLink = this.game.constructLink !== "";
 
-    if (this.game.constructLink === "")
-      this.validState.validConstructLink = false;
-    else
-      this.validState.validConstructLink = true;
+    for (let index = 0; index < this.game.levels.length; index++) {
+      this.validState.validLevels[index].validAlchemerLink = this.game.levels[index].alchemerLink !== "";
+      this.validState.validLevels[index].validMillis = this.game.levels[index].millis != 0;
+      this.validState.validLevels[index].validImageLink = this.game.levels[index].imageLink !== "";
 
-    this.game.levels.forEach(level => {
-      if (level.alchemerLink === "")
-        this.validState.validLevels = false;
-      else
-        this.validState.validLevels = true;
-
-      if (level.millis == 0)
-        this.validState.validLevels = false;
-      else
-        this.validState.validLevels = true;
-
-      if (level.imageLink === "")
-        this.validState.validLevels = false;
-      else
-        this.validState.validLevels = true;
-    });
+      for (let subindex = 0; subindex < this.game.levels[index].awards.length; subindex++) {
+        this.validState.validLevels[index].validAwards[subindex].validName = this.game.levels[index].awards[subindex].name !== "";
+        this.validState.validLevels[index].validAwards[subindex].validImageLink = this.game.levels[index].awards[subindex].imageLink !== "";
+      }
+    }
 
     for (let prop in this.validState) {
-      if (!this.validState[prop]) {
-        console.log(prop);
+      if (!this.validState[prop])
         return false;
+    }
+
+    for (let level of this.validState.validLevels) {
+      for (let prop in level) {
+        if (!level[prop])
+          return false;
+      }
+
+      for (let award of level.validAwards) {
+        for (let prop in award) {
+          if (!award[prop]) {
+            return false;
+          }
+        }
       }
     }
 

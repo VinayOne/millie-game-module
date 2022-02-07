@@ -3,3 +3,10 @@
 	color: #E8F9FA;
 }
 
+.error {
+	border: solid red;
+}
+
+p {
+	color: red;
+}
