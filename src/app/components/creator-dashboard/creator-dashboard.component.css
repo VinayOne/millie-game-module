@@ -20,3 +20,11 @@ button {
 	background-color: #0A52CE;
 	color: #E8F9FA;
 }
+
+.error {
+	border: solid red;
+}
+
+p {
+	color: red;
+}

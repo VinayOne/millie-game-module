@@ -22,7 +22,7 @@ export class GameService {
   }
 
   // change method name to getCurrentGame
-  getGame() {
+  getCurrentGame() {
     return this.http.get<any>("/api/game/current", httpOptions);
   }
 

@@ -38,7 +38,7 @@ export class GameAreaComponent implements OnInit {
   constructor(private gameService: GameService) { }
 
   ngOnInit(): void {
-    this.gameService.getGame().subscribe(game => this.game = game, err => console.log(err));
+    this.gameService.getCurrentGame().subscribe(game => this.game = game, err => console.log(err));
   }
 
   ngAfterContentChecked() {

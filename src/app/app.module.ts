@@ -23,6 +23,7 @@ import { UserBoardComponent } from './components/user-board/user-board.component
 import { CreatorDashboardComponent } from './components/creator-dashboard/creator-dashboard.component';
 import { CreatorDashboardHomeComponent } from './components/creator-dashboard-home/creator-dashboard-home.component';
 import { LevelComponent } from './components/level/level.component';
+import { AwardComponent } from './components/award/award.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { LevelComponent } from './components/level/level.component';
     UserBoardComponent,
     CreatorDashboardComponent,
     CreatorDashboardHomeComponent,
-    LevelComponent
+    LevelComponent,
+    AwardComponent
   ],
   imports: [
     BrowserModule,

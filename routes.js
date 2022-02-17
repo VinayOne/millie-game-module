@@ -79,7 +79,7 @@ router.get("/users", async (req, res) => {
 });
 
 router.get("/game/current", async (req, res) => {
-	// find game by date between startDate and endDate
+	// look up game where current date comes after start date AND current date comes before end date
 	res.status(501).send();
 });
 
@@ -112,6 +112,7 @@ router.put("/game/:id", async (req, res) => {
 		seasonName: req.body.seasonName,
 		startDate: start,
 		endDate: end,
+		constructLink: req.body.constructLink,
 		levels: req.body.levels
 	});
 	res.status(200).send(game);
@@ -126,6 +127,7 @@ router.post("/game", async (req, res) => {
 		seasonName: req.body.seasonName,
 		startDate: start,
 		endDate: end,
+		constructLink: req.body.constructLink,
 		levels: req.body.levels
 	});
 
