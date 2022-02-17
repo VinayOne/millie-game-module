@@ -78,6 +78,11 @@ router.get("/users", async (req, res) => {
 	res.status(200).send(users);
 });
 
+router.get("/game/current", async (req, res) => {
+	// find game by date between startDate and endDate
+	res.status(501).send();
+});
+
 router.get("/game/:id", async (req, res) => {
 	Game.findById(req.params.id, async (error, game) => {
 		if (error)
