@@ -1,4 +1,11 @@
-<p *ngIf="user.rank">{{user.rank}}</p>
+<!-- <p *ngIf="user.rank">{{user.rank}}</p>
 <p *ngIf="!user.rank">No rank</p>
 <img src="{{user.image}}" alt="{{user.username}}">
-<p>{{user.username}}<br/>{{user.millis}}</p>
+<p>{{user.username}}<br/>{{user.millis}}</p> -->
+<div class="leaderBoardContainer">
+    <div class="profileBox" *ngFor="let user of userData.slice(0, 4);">
+        <img src="{{user.image}}" />
+        <p>{{user.username}}</p>
+        <p>{{user.millis}}</p>
+    </div>
+</div>

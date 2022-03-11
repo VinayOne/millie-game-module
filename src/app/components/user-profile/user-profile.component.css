@@ -1,6 +1,22 @@
+.leaderBoardContainer {
+	display: flex;
+	flex-wrap: nowrap;
+	flex-direction: row;
+	padding: 0.5rem 0 0 0;
+}
+
 img {
 	object-fit: cover;
 	height:  60px;
 	width:  60px;
 	border-radius: 50%;
+}
+
+.profileBox {
+	flex: auto;
+}
+
+.profileBox p {
+	font: normal 1rem/0.5rem 'Arial';
+	margin: 0.6rem 0;
 }
