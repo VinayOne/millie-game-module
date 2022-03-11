@@ -43,7 +43,7 @@ router.post("/login", (req, res) => {
 	});
 });
 
-accessToken = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm9maWxlSWQiOiI2MTVkNGNkYTk2ZGUwODc1ZGE2MjQxOTMiLCJleHBpcmVzSW4iOiIzMGQiLCJwcm9maWxlVHlwZSI6ImdhbWUiLCJpYXQiOjE2NDI1MTM4NjQsImV4cCI6MTY0NTEwNTg2NH0._5UnEmDnCTC-2cM1RkDDOn6qnKwGP5x0naQ8FYRvPkc`;
+accessToken = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm9maWxlSWQiOiI2MWRkZGEyZWNhYTcxYjBlYTk4Zjc0MTAiLCJleHBpcmVzSW4iOiIzMGQiLCJwcm9maWxlVHlwZSI6ImdhbWUiLCJpYXQiOjE2NDYxMzExOTcsImV4cCI6MTY0ODcyMzE5N30.GwmZNf8oeY5Om2c_KSB6q4p7UKD8nbUdzhJSTG46mwA`;
 adminAccessToken = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm9maWxlSWQiOiI2MTJkZDJlMTk4MzcwNDFmZDMwZTIxMzAiLCJleHBpcmVzSW4iOiIzMGQiLCJwcm9maWxlVHlwZSI6ImdhbWUtYWRtaW4iLCJpYXQiOjE2NDI1MTQ3MTEsImV4cCI6MTY0NTEwNjcxMX0.yOhHNyh-piBI33udN4qvo-ND2xlQWt920x4RrwYnTfA`;
 
 router.get("/user-detail", async (req, res) => {
@@ -54,7 +54,7 @@ router.get("/user-detail", async (req, res) => {
 	  method: 'get',
 	  url: 'http://18.118.169.0:5000/api/v1/user/game/user-detail',
 	  headers: { 
-	    'accessToken': adminAccessToken
+	    'accessToken': accessToken
 	  },
 	  data : data
 	};

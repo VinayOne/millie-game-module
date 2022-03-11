@@ -2,11 +2,12 @@
 <button *ngIf="showLeaderboard" class="link" (click)="openModal(modal)">Leaderboard: {{interest}}</button>
 <div *ngIf="!showLeaderboard" style="display: inline-block;">Leaderboard: {{interest}}</div>
 <div *ngIf="showLeaderboard" class="row">
-	<app-user-profile
+	<!-- <app-user-profile
 		class="col text-center"
 		*ngFor="let user of users"
 		[user]="user">
-	</app-user-profile>
+	</app-user-profile> -->
+	<app-user-profile class="col text-center" [userData]="leaderBoardUsers"></app-user-profile>
 </div>
 
 <ng-template #modal let-modal>
@@ -20,7 +21,7 @@
 			class="btn btn-block btn-interest"
 			*ngFor="let interest of interests"
 			(click)="changeInterest(modal, interest)">
-			{{interest.slice(0,1).toUpperCase() + interest.slice(1)}}
+			{{interest.title.slice(0,1).toUpperCase() + interest.title.slice(1)}}
 		</button>
 	</div>
 </ng-template>

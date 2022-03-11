@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { filter } from 'rxjs/operators';
 import { User } from "../../User";
 import { UserService } from "../../services/user.service";
 import {NgbModal, ModalDismissReasons, NgbModalOptions} from '@ng-bootstrap/ng-bootstrap';
@@ -12,8 +13,10 @@ import {NgbModal, ModalDismissReasons, NgbModalOptions} from '@ng-bootstrap/ng-b
 export class LeaderboardComponent implements OnInit {
   @Input() users: User[] = [];
   user: any = {};
-  interests: string[] = [];
+  interests: any[] = [];
   interest: string = "";
+  interestId: string = "";
+  leaderBoardUsers: any[] = [];
   showLeaderboard: boolean = false;
   modalOptions: NgbModalOptions = {};
 
@@ -23,20 +26,23 @@ export class LeaderboardComponent implements OnInit {
     this.userService.getUserDetail().subscribe((userDetail) => {
       this.user = userDetail.data.result;
 
-      this.user.interests.forEach((interest: any) => this.interests.push(interest.title));
+      this.user.interests.forEach((interest: any) => this.interests.push({'id': interest.id, 'title': interest.title}));
 
-      this.interest = this.interests[0];
+      this.interest = this.interests[0].title;
+      this.interestId = this.interests[0].id;
     });
 
-    this.userService.getUsers().subscribe((users) => {
-      users = users.filter(user => user.interests.some(interest => this.interest.toLowerCase() == interest));
+    // this.userService.getUsers().subscribe((users) => { //Load leaderboard profiles
+    //   console.log('LoadUsersRes > ', users);
+    //   users = users.filter(user => user.interests.some(interest => this.interest.toLowerCase() == interest));
 
-      users.sort((userA, userB) => userB.millis - userA.millis);
+    //   users.sort((userA, userB) => userB.millis - userA.millis);
 
-      users.forEach((user, index) => user.rank = index + 1);
+    //   users.forEach((user, index) => user.rank = index + 1);
 
-      this.users = users.filter(user => (user.rank && user.rank <= 3));
-    });
+    //   this.users = users.filter(user => (user.rank && user.rank <= 3));
+    //   //console.log('loadUsers > ', this.users);
+    // });
   }
 
   // may need to change modal's data type to be more secure
@@ -44,14 +50,26 @@ export class LeaderboardComponent implements OnInit {
     this.modalService.open(modal, this.modalOptions).result.then((result) => {}, (reason) => {});
   }
 
-  changeInterest(modal: any, interest: string) {
-    this.interest = interest.slice(0,1).toUpperCase() + interest.slice(1);
+  changeInterest(modal: any, interest: any) {
+    this.interest = interest.title.slice(0,1).toUpperCase() + interest.title.slice(1);
+    this.interestId = interest.id;
     modal.close();
     // more robust way to reload component
-    this.ngOnInit();
+    // this.ngOnInit();
+    this.getLeaderboardUsers();
   }
 
   toggleLeaderboard() {
     this.showLeaderboard = !this.showLeaderboard;
+    this.getLeaderboardUsers();
+  }
+
+  //Get LeaderBoard Users
+  getLeaderboardUsers() {
+    this.userService.getUsersByInterest(this.interestId).subscribe((userData) => {
+      const topUsers = userData.data.result;
+      topUsers.rows.forEach((user: any) => this.leaderBoardUsers.push({'username': user.firstName, 'millis': user.totalMillis, 'image': user.profilePicture}));
+      console.log('Leaderboard > ', this.leaderBoardUsers);
+    });
   }
 }
