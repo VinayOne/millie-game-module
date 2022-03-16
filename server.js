@@ -8,7 +8,7 @@ const routes = require("./routes");
 
 const app = express();
 
-const url = `mongodb+srv://brandon123:z7DIKPJ41b6SBq7q@cluster0.bg91i.mongodb.net/game-module-db?retryWrites=true&w=majority`;
+const url = `mongodb+srv://vinayone:12Ekq1qw9Dh1G5J1@cluster0.5vd7f.mongodb.net/game-module-db?retryWrites=true&w=majority`;
 
 const connectionParams={
     useNewUrlParser: true,

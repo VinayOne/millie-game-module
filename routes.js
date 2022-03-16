@@ -4,6 +4,7 @@ const router = express.Router();
 
 const User = require("./models/User");
 const Game = require("./models/Game");
+const CG = require("./models/ConstructGame");
 
 const axios = require('axios');
 const baseUrl = 'http://18.118.169.0:5000';
@@ -160,5 +161,58 @@ router.delete("/game/:id", async (req, res) => {
 	const game = await Game.findByIdAndRemove(req.params.id);
 	res.status(200).send(game);
 });
+
+router.route('/creategameuser').post((req, res, next) => {
+	CG.create(req.body, (error, data) => {
+		if(error) {
+			return next(error)
+		} else {
+			res.json(data)
+		}
+	})
+});
+
+router.route('/getgameusers').get((req, res, next) => {
+	CG.find((error, data) => {
+		if(error) {
+			return next(error)
+		} else {
+			res.json(data)
+		}
+	}) 
+});
+
+router.route('/getgameuser/:id').get((req, res, next) => {
+	CG.findById(req.params.id, (error, data) => {
+		if(error) {
+			return next(error)
+		} else {
+			res.json(data)
+		}
+	})
+});
+
+router.route('/updategameuser/:id').put((req, res, next) => {
+	CG.findByIdAndUpdate(req.params.id, {$set: req.body}, (error, data) => {
+		if(error) {
+			return next(error)
+		} else {
+			res.json(data);
+			console.log('Updated Successfuly!');
+		}
+	})
+});
+
+router.route('/deletegameuser/:id').delete((req, res, next) => {
+	CG.findByIdAndRemove(req.params.id, (error, data) => {
+		if(error) {
+			return next(error)
+		} else {
+			res.status(200).json({
+				'msg' : data
+			})
+		}
+	})
+})
 
 module.exports = router;
