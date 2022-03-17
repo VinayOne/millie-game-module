@@ -4,7 +4,7 @@ const schema = mongoose.Schema({
 	name: String,
 	startLevel: String,
 	endLevel: String,
-	date: Date
+	levelSuccess: Boolean
 });
 
 module.exports = mongoose.model("ConstructGame", schema);
