@@ -8,6 +8,8 @@ const CG = require("./models/ConstructGame");
 
 const axios = require('axios');
 const baseUrl = 'http://18.118.169.0:5000';
+const userData = {};
+
 
 function verifyToken(req, res, next) {
 	if (!req.headers.authorization)
@@ -213,6 +215,18 @@ router.route('/deletegameuser/:id').delete((req, res, next) => {
 			})
 		}
 	})
-})
+});
+
+router.route('/currentUserId').get((req, res, next) => {
+	//const currentEmail = currentUserEmail.result.email;
+	// console.log(userResponse);
+	CG.findOne({email : 'spiderman@gmail.com'}, (error, data) => {
+		if(error) {
+			return next(error)
+		} else {
+			res.send(data._id);
+		}
+	})
+});
 
 module.exports = router;

@@ -41,4 +41,8 @@ export class UserService {
   getUsersByInterest(interestId:any, pageCount:number = 10, page:number = 1): Observable<any> {
     return this.http.get<any>(`/api/leaderboard-users/${pageCount}/${interestId}/${page}`, httpOptions)
   }
+
+  registerCurrentUser(userData: any): Observable<any> {
+    return this.http.post<any>(`/api/creategameuser`, userData, httpOptions)
+  }
 }
