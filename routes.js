@@ -8,7 +8,6 @@ const CG = require("./models/ConstructGame");
 
 const axios = require('axios');
 const baseUrl = 'http://18.118.169.0:5000';
-const userData = {};
 
 
 function verifyToken(req, res, next) {
@@ -102,9 +101,19 @@ router.get("/users", async (req, res) => {
 	res.status(200).send(users);
 });
 
-router.get("/game/current", async (req, res) => {
+router.get("/game/current", (req, res) => {
 	// look up game where current date comes after start date AND current date comes before end date
-	res.status(501).send();
+	Game.findOne({endDate:{$gte: new Date()},startDate:{$lte: new Date()}}, (error, data) => {
+		if (error) {
+			console.log(error)
+		} else {
+			if (!data) {
+				res.status(403).send("No game found!");
+			} else {
+				res.status(200).send(data);
+			}
+		}
+	});
 });
 
 router.get("/game/:id", async (req, res) => {
@@ -224,7 +233,7 @@ router.route('/currentUserId').get((req, res, next) => {
 		if(error) {
 			return next(error)
 		} else {
-			res.send(data._id);
+			res.send(data);
 		}
 	})
 });
