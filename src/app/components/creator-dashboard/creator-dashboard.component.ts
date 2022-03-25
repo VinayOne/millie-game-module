@@ -26,9 +26,9 @@ export class CreatorDashboardComponent implements OnInit {
     constructLink: "",
     levels: [{
       alchemerLink: "",
-      millis: 0,
-      imageLink: "",
-      awards: []
+      millis: 0
+     // imageLink: "",
+     // awards: []
     }]
   };
 
@@ -42,9 +42,9 @@ export class CreatorDashboardComponent implements OnInit {
     validConstructLink: true,
     validLevels: [{
       validAlchemerLink: true,
-      validMillis: true,
-      validImageLink: true,
-      validAwards: []
+      validMillis: true
+      // validImageLink: true,
+      // validAwards: []
     }]
   }
 
@@ -83,9 +83,9 @@ export class CreatorDashboardComponent implements OnInit {
 
             this.validState.validLevels = Array(this.numOfLevels).fill({
               validAlchemerLink: true,
-              validMillis: true,
-              validImageLink: true,
-              validAwards: []
+              validMillis: true
+              // validImageLink: true,
+              // validAwards: []
             });
 
           }, err => console.log(err));      
@@ -96,16 +96,16 @@ export class CreatorDashboardComponent implements OnInit {
     if (this.numOfLevels > this.game.levels.length) {
       this.game.levels.push({
         alchemerLink: "",
-        millis: 0,
-        imageLink: "",
-        awards: []
+        millis: 0
+        // imageLink: "",
+        // awards: []
       });
 
       this.validState.validLevels.push({
         validAlchemerLink: true,
-        validMillis: true,
-        validImageLink: true,
-        validAwards: []
+        validMillis: true
+        // validImageLink: true,
+        // validAwards: []
       });
     }
     else {
@@ -196,12 +196,12 @@ export class CreatorDashboardComponent implements OnInit {
     for (let index = 0; index < this.game.levels.length; index++) {
       this.validState.validLevels[index].validAlchemerLink = this.game.levels[index].alchemerLink !== "";
       this.validState.validLevels[index].validMillis = this.game.levels[index].millis != 0;
-      this.validState.validLevels[index].validImageLink = this.game.levels[index].imageLink !== "";
+     // this.validState.validLevels[index].validImageLink = this.game.levels[index].imageLink !== "";
 
-      for (let subindex = 0; subindex < this.game.levels[index].awards.length; subindex++) {
-        this.validState.validLevels[index].validAwards[subindex].validName = this.game.levels[index].awards[subindex].name !== "";
-        this.validState.validLevels[index].validAwards[subindex].validImageLink = this.game.levels[index].awards[subindex].imageLink !== "";
-      }
+      // for (let subindex = 0; subindex < this.game.levels[index].awards.length; subindex++) {
+      //   this.validState.validLevels[index].validAwards[subindex].validName = this.game.levels[index].awards[subindex].name !== "";
+      //   this.validState.validLevels[index].validAwards[subindex].validImageLink = this.game.levels[index].awards[subindex].imageLink !== "";
+      // }
     }
 
     for (let prop in this.validState) {
@@ -215,13 +215,13 @@ export class CreatorDashboardComponent implements OnInit {
           return false;
       }
 
-      for (let award of level.validAwards) {
-        for (let prop in award) {
-          if (!award[prop]) {
-            return false;
-          }
-        }
-      }
+      // for (let award of level.validAwards) {
+      //   for (let prop in award) {
+      //     if (!award[prop]) {
+      //       return false;
+      //     }
+      //   }
+      // }
     }
 
     return true;

@@ -10,17 +10,14 @@ import { Game } from '../../Game';
   styleUrls: ['./game-area.component.css']
 })
 export class GameAreaComponent implements OnInit {
-  //@ViewChild('iframeTag') iframeTag: ElementRef<any>;
   @Input() dashboardHeight: number = 0;
   answers: String[] = ["red", "blue", "yellow", "green"];
 
-  iframeContent: SafeResourceUrl;
-
-  public alchemerLink1 = 'https://survey.alchemer.com/s3/6697157/Where-is-Milli-Chapter-1';
-  gameLink1 = 'https://brandon-earwood.github.io/water-sort/';
-
-  name = 'gameArea';
-  // loadHtml: any;
+  iframeContent: SafeResourceUrl = '';
+  alchemerLinks: any = [];
+  spotDiffImages: any = [];
+  totalLevels: number = 0;
+  currentLevel: number = 0;
 
   game: Game = {
     _id: "",
@@ -32,10 +29,11 @@ export class GameAreaComponent implements OnInit {
     levels: [{
       alchemerLink: "",
       millis: 0,
-      imageLink: "",
-      awards: [{ name: "", imageLink: "" }]
+      // imageLink: "",
+      // awards: [{ name: "", imageLink: "" }]
     }]
   };
+
 
   gameState: any = {
     currentLevel: 0,
@@ -46,42 +44,49 @@ export class GameAreaComponent implements OnInit {
     playingConstructGame: false
   };
 
-  constructor(private http: HttpClient, private gameService: GameService, private sanitizer: DomSanitizer) { 
-    this.iframeContent = sanitizer.bypassSecurityTrustResourceUrl('https://c3.ideazz.com.pk/noman/watersort/index.html');
-    // setTimeout(() => {
-    //   this.changeUrl();
-    // },500)
-  }
+  constructor(private http: HttpClient, private gameService: GameService, private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
-    this.gameService.getCurrentGame().subscribe(game => this.game = game, err => console.log(err));
-    //let doc =  this.iframe.nativeElement.contentDocument || this.iframe.nativeElement.contentWindow;
+    this.getCurrentGame();
+  }
+
+  getCurrentGame() {
+    this.gameService.getCurrentGame()
+      .subscribe(
+        game => { 
+          this.game = game;
+          this.alchemerLinks = this.game.levels.map(link => {
+            return link.alchemerLink;
+          });
+          // this.spotDiffImages = this.game.levels.map(link => {
+          //   return link.imageLink;
+          // });
+          this.totalLevels = this.alchemerLinks.length;
+          this.loadQuest();
+        },      
+      err => console.log(err));
+  };
+
+  loadQuest() {
+    const content = this.alchemerLinks[0];
+    this.iframeContent = this.sanitizer.bypassSecurityTrustResourceUrl(content);
+  };
+
+  getAlert() {
+    console.log('clicked from iframe');
+  }
+
+  gameOver(){
 
   }
 
-  // loadExtWeb() {
-  //   this.http
-  //     .get('https://survey.alchemer.com/s3/6697157/Where-is-Milli-Chapter-1', { responseType: 'text' })
-  //     .subscribe((res) => {
-  //       this.loadHtml = this.sanitizer.bypassSecurityTrustHtml(res);
-  //     });
-  // }
-
-  changeUrl() {
-    let iframeArea: HTMLIFrameElement  = document.querySelector("#frameBox") as HTMLIFrameElement;
-    let elem = iframeArea['contentWindow'];
-    if (elem !== null) {
-      console.log('iframe >>>>', elem);
-    }
-      
-  }
 
   ngAfterContentChecked() {
 
   }
 
   ngAfterViewInit() {
-    //let doc =  this.iframeTag.nativeElement.contentDocument || this.iframeTag.nativeElement.contentWindow;
+    
   }
 
   updateState() {

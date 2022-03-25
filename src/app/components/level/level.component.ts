@@ -15,25 +15,25 @@ export class LevelComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.numOfAwards = this.level.awards.length;
-    this.validState.validAwards = Array(this.numOfAwards).fill({ validName: true, validImageLink: true });
+    //this.numOfAwards = this.level.awards.length;
+    //this.validState.validAwards = Array(this.numOfAwards).fill({ validName: true, validImageLink: true });
   }
 
-  updateAwardsArray() {
-    if (this.numOfAwards > this.level.awards.length) {
-      this.level.awards.push({
-        name: "",
-        imageLink: ""
-      });
+  // updateAwardsArray() {
+  //   if (this.numOfAwards > this.level.awards.length) {
+  //     this.level.awards.push({
+  //       name: "",
+  //       imageLink: ""
+  //     });
 
-      this.validState.validAwards.push({
-        validName: true,
-        validImageLink: true
-      });
-    }
-    else {
-      this.level.awards.pop();
-      this.validState.validAwards.pop();
-    }
-  }
+  //     this.validState.validAwards.push({
+  //       validName: true,
+  //       validImageLink: true
+  //     });
+  //   }
+  //   else {
+  //     this.level.awards.pop();
+  //     this.validState.validAwards.pop();
+  //   }
+  // }
 }
