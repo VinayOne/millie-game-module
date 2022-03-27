@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, Input, ViewChild, ElementRef  } from '@angular/core';
+import { AfterViewInit, Component, OnInit, Input, ViewChild, ElementRef, HostListener  } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
 import { GameService } from '../../services/game.service';
@@ -15,9 +15,12 @@ export class GameAreaComponent implements OnInit {
 
   iframeContent: SafeResourceUrl = '';
   alchemerLinks: any = [];
-  spotDiffImages: any = [];
+  //spotDiffImages: any = [];
   totalLevels: number = 0;
   currentLevel: number = 0;
+
+  element: any;
+  iframe: any;
 
   game: Game = {
     _id: "",
@@ -44,7 +47,18 @@ export class GameAreaComponent implements OnInit {
     playingConstructGame: false
   };
 
-  constructor(private http: HttpClient, private gameService: GameService, private sanitizer: DomSanitizer) { }
+  constructor(private http: HttpClient, private gameService: GameService, private sanitizer: DomSanitizer) {     
+    window.addEventListener('message', (event) => {
+	  if(event.data === 'chapterOne' || event.data === 'chapterTwo' || event.data === 'chapterThree' || event.data === 'chapterFour') {
+      console.log('message received: ', event.data);
+      // next redirect to game url
+      const gameUrl = 'https://sancharseva.com/lets-ask-milli/water-sort/';
+      setTimeout(() => {
+        this.loadQuest(gameUrl);
+      },5000)
+		  }
+    });
+  }
 
   ngOnInit(): void {
     this.getCurrentGame();
@@ -62,23 +76,14 @@ export class GameAreaComponent implements OnInit {
           //   return link.imageLink;
           // });
           this.totalLevels = this.alchemerLinks.length;
-          this.loadQuest();
+          this.loadQuest(this.alchemerLinks[0]);
         },      
       err => console.log(err));
   };
 
-  loadQuest() {
-    const content = this.alchemerLinks[0];
+  loadQuest(content: any): void {
     this.iframeContent = this.sanitizer.bypassSecurityTrustResourceUrl(content);
   };
-
-  getAlert() {
-    console.log('clicked from iframe');
-  }
-
-  gameOver(){
-
-  }
 
 
   ngAfterContentChecked() {

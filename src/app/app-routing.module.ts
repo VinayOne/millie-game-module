@@ -4,6 +4,7 @@ import { ContentAreaComponent } from './components/content-area/content-area.com
 import { LoginComponent } from './components/login/login.component';
 import { CreatorDashboardHomeComponent } from './components/creator-dashboard-home/creator-dashboard-home.component';
 import { CreatorDashboardComponent } from './components/creator-dashboard/creator-dashboard.component';
+import { GameOverComponent } from './components/game-over/game-over.component';
 
 const routes: Routes = [
   // {
@@ -30,6 +31,10 @@ const routes: Routes = [
   {
     path: 'dashboard/:id',
     component: CreatorDashboardComponent,
+  },
+  {
+    path: 'game-over',
+    component: GameOverComponent,
   }
 ];
 

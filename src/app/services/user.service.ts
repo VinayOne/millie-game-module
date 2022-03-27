@@ -30,12 +30,12 @@ export class UserService {
   }
 
   getUserDetail(): Observable<any> {
-    return this.http.get<any>("/api/user-detail", httpOptions);
+    return this.http.get<any>('/api/user-detail', httpOptions);
     //return this.http.get<any>(`${this.baseUrl}/user/game/user-detail`, httpOptions);
   }
 
   loginUser(user: any) {
-    return this.http.post<any>("/api/login", user, httpOptions);
+    return this.http.post<any>('/api/login', user, httpOptions);
   }
 
   getUsersByInterest(interestId:any, pageCount:number = 10, page:number = 1): Observable<any> {
@@ -43,6 +43,10 @@ export class UserService {
   }
 
   registerCurrentUser(userData: any): Observable<any> {
-    return this.http.post<any>(`/api/creategameuser`, userData, httpOptions)
+    return this.http.post<any>('/api/creategameuser', userData, httpOptions)
+  }
+
+  getCurrentUser(): Observable<any> {
+    return this.http.get<any>('/api/currentUserId', httpOptions)
   }
 }

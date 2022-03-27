@@ -24,6 +24,7 @@ import { CreatorDashboardComponent } from './components/creator-dashboard/creato
 import { CreatorDashboardHomeComponent } from './components/creator-dashboard-home/creator-dashboard-home.component';
 import { LevelComponent } from './components/level/level.component';
 import { AwardComponent } from './components/award/award.component';
+import { GameOverComponent } from './components/game-over/game-over.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { AwardComponent } from './components/award/award.component';
     CreatorDashboardComponent,
     CreatorDashboardHomeComponent,
     LevelComponent,
-    AwardComponent
+    AwardComponent,
+    GameOverComponent
   ],
   imports: [
     BrowserModule,
