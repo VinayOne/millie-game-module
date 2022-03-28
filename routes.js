@@ -85,7 +85,7 @@ router.get("/leaderboard-users/:pageCount/:interestId/:page", async (req, res) =
 
 	axios(config)
 	.then(function (response) {
-	  res.status(200).send(JSON.stringify(response.data)).set(userData, JSON.stringify(response.data));
+	  res.status(200).send(JSON.stringify(response.data));
 	})
 	.catch(function (error) {
 	  res.status(404).send(error);
