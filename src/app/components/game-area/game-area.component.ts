@@ -34,7 +34,8 @@ export class GameAreaComponent implements OnInit {
       millis: 0,
       // imageLink: "",
       // awards: [{ name: "", imageLink: "" }]
-    }]
+    }],
+    finalAlchemerLink: ""
   };
 
 

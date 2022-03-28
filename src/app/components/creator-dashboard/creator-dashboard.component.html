@@ -88,6 +88,17 @@
 			[level]="level"
 			[validState]="validState.validLevels[i]">
 		</app-level>
+		<div class="form-group">
+			<div class="input-group mb-2">
+				<div class="input-group-prepend">
+					<div class="input-group-text" id="finalAlchemerLink">What is the Final Alchemer Survey link?</div>
+				</div>
+				<input type="form-text" class="form-control text-center" [(ngModel)]="game.finalAlchemerLink" name="finalAlchemerLink" [ngClass]="{'error': !validState.validfinalAlchemerLink}">
+			</div>
+			<div class="d-block" *ngIf="!validState.validfinalAlchemerLink">
+				<p>Please enter the Final Alchemer link.</p>
+			</div>
+		</div>
 	</form>
 	<div class="row">
 		<div class="col-4">

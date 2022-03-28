@@ -29,7 +29,8 @@ export class CreatorDashboardComponent implements OnInit {
       millis: 0
      // imageLink: "",
      // awards: []
-    }]
+    }],
+    finalAlchemerLink: ""
   };
 
   validState: any = {
@@ -45,7 +46,8 @@ export class CreatorDashboardComponent implements OnInit {
       validMillis: true
       // validImageLink: true,
       // validAwards: []
-    }]
+    }],
+    validfinalAlchemerLink: true
   }
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private gameService: GameService) { }
@@ -68,6 +70,7 @@ export class CreatorDashboardComponent implements OnInit {
             this.game.endDate = new Date(res.endDate.substring(0, 10));
             this.game.constructLink = res.constructLink;
             this.game.levels = res.levels;
+            this.game.finalAlchemerLink = res.finalAlchemerLink;
 
             this.game.startDate = {
               year: +res.startDate.substring(0, 4),
@@ -192,6 +195,7 @@ export class CreatorDashboardComponent implements OnInit {
     }
 
     this.validState.validConstructLink = this.game.constructLink !== "";
+    this.validState.validfinalAlchemerLink = this.game.finalAlchemerLink !== "";
 
     for (let index = 0; index < this.game.levels.length; index++) {
       this.validState.validLevels[index].validAlchemerLink = this.game.levels[index].alchemerLink !== "";

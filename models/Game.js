@@ -6,7 +6,8 @@ const schema = mongoose.Schema({
 	startDate: Date,
 	endDate: Date,
 	constructLink: String,
-	levels: [Object]
+	levels: [Object],
+	finalAlchemerLink: String
 });
 
 module.exports = mongoose.model("Game", schema);

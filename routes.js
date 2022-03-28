@@ -147,7 +147,8 @@ router.put("/game/:id", async (req, res) => {
 		startDate: start,
 		endDate: end,
 		constructLink: req.body.constructLink,
-		levels: req.body.levels
+		levels: req.body.levels,
+		finalAlchemerLink: req.body.finalAlchemerLink
 	});
 	res.status(200).send(game);
 });
@@ -162,7 +163,8 @@ router.post("/game", async (req, res) => {
 		startDate: start,
 		endDate: end,
 		constructLink: req.body.constructLink,
-		levels: req.body.levels
+		levels: req.body.levels,
+		finalAlchemerLink: req.body.finalAlchemerLink
 	});
 
 	await game.save();

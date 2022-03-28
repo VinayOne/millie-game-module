@@ -5,5 +5,6 @@ export interface Game {
 	startDate: any,
 	endDate: any,
 	constructLink: String,
-	levels: any[]
+	levels: any[],
+	finalAlchemerLink: String
 }
