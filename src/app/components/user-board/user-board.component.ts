@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 export class UserBoardComponent implements OnInit {
   user: any = {};
   userEmail = '';
+  userMillis = '';
+  earnedMillis = 0;
 
   constructor(private userService: UserService, private router: Router) { }
 
@@ -20,8 +22,10 @@ export class UserBoardComponent implements OnInit {
 
   getUserInfo() {
     this.userService.getUserDetail().subscribe((userDetail: any) => {
-      this.user = userDetail.data.result;
-      this.userEmail = userDetail.data.result.email;
+      this.user = userDetail.data.result || {};
+      this.userEmail = userDetail.data.result.email || '';
+      this.userMillis = userDetail.data.result.millies || '0';
+      localStorage.setItem('userMillis', this.userMillis);
       setTimeout(() => {
         this.registerCurrentUsr();
       }, 500);
@@ -31,7 +35,6 @@ export class UserBoardComponent implements OnInit {
   registerCurrentUsr() {
     this.userService.getCurrentUser().subscribe((response: any) => {
       const currentUserEmail = response ? response.email : null;
-      console.log('currentUserEmail: ', currentUserEmail);
       if(currentUserEmail !== null && currentUserEmail === this.userEmail) {
         return console.info(this.userEmail + ' already registered');
       } else {      
@@ -40,7 +43,8 @@ export class UserBoardComponent implements OnInit {
       "startLevel" : "0",
       "endLevel" : "0",
       "levelSuccess" : false,
-      "email" : this.user.email
+      "email" : this.user.email,
+      "millis": this.user.millies
         };
 
       this.userService.registerCurrentUser(userInfo)
@@ -51,6 +55,17 @@ export class UserBoardComponent implements OnInit {
         });
       }
     });
+  }
+
+  getMillisEarned() {
+    const updatedMills = localStorage.getItem('userMillis') || '0';
+    this.earnedMillis = parseInt(updatedMills) - parseInt(this.userMillis);
+    setTimeout(() => {
+      this.userMillis = updatedMills;
+    }, 500);
+    console.log('getMillisEarned called!');
+    console.log('updatedMills: ', updatedMills);
+    console.log('userMillis: ', this.userMillis);
   }
 
   openAdminDashboard() {

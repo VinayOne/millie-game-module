@@ -5,7 +5,8 @@ const schema = mongoose.Schema({
 	startLevel: String,
 	endLevel: String,
 	levelSuccess: Boolean,
-	email: String
+	email: String,
+	millis: String
 });
 
 module.exports = mongoose.model("ConstructGame", schema);

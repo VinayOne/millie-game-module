@@ -2,7 +2,9 @@ import { AfterViewInit, Component, OnInit, Input, ViewChild, ElementRef, HostLis
 import { HttpClient } from '@angular/common/http';
 import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
 import { GameService } from '../../services/game.service';
+import { UserService } from "../../services/user.service";
 import { Game } from '../../Game';
+import { UserBoardComponent } from '../user-board/user-board.component';
 
 @Component({
   selector: 'app-game-area',
@@ -11,6 +13,7 @@ import { Game } from '../../Game';
 })
 export class GameAreaComponent implements OnInit {
   @Input() dashboardHeight: number = 0;
+  @ViewChild(UserBoardComponent) userComponentRef !: UserBoardComponent;
   answers: String[] = ["red", "blue", "yellow", "green"];
 
   iframeContent: SafeResourceUrl = '';
@@ -21,6 +24,8 @@ export class GameAreaComponent implements OnInit {
 
   element: any;
   iframe: any;
+
+  userMillis = '';
 
   game: Game = {
     _id: "",
@@ -48,7 +53,7 @@ export class GameAreaComponent implements OnInit {
     playingConstructGame: false
   };
 
-  constructor(private http: HttpClient, private gameService: GameService, private sanitizer: DomSanitizer) {     
+  constructor(private http: HttpClient, private gameService: GameService, private userService: UserService, private sanitizer: DomSanitizer) {     
     window.addEventListener('message', (event) => {
 	  if(event.data === 'chapterOne' || event.data === 'chapterTwo' || event.data === 'chapterThree' || event.data === 'chapterFour') {
       console.log('message received: ', event.data);
@@ -56,6 +61,7 @@ export class GameAreaComponent implements OnInit {
       const gameUrl = 'https://sancharseva.com/lets-ask-milli/water-sort/';
       setTimeout(() => {
         this.loadQuest(gameUrl);
+        this.updateUserMillis();
       },5000)
 		  }
     });
@@ -86,6 +92,15 @@ export class GameAreaComponent implements OnInit {
     this.iframeContent = this.sanitizer.bypassSecurityTrustResourceUrl(content);
   };
 
+  updateUserMillis(): void {
+    this.userService.getUserDetail().subscribe((userDetail: any) => {
+      this.userMillis = userDetail.data.result.millies;
+      localStorage.setItem('userMillis', this.userMillis);
+      setTimeout(() => {
+        this.userComponentRef.getMillisEarned();
+      },300)
+    });
+  }
 
   ngAfterContentChecked() {
 

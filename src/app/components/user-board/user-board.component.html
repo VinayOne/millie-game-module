@@ -2,12 +2,12 @@
     <div class="row">
         <div class="col">
             <img src="{{user.profilePicture}}" alt="{{user.firstName}}">
-            <p>{{user.firstName}}<br/>Millis: {{user.millies}}</p>
+            <p>{{user.firstName}}<br/>Millis: {{userMillis}}</p>
             <button *ngIf="user.isAdmin" class="btn btn-sml btn-primary" (click)="openAdminDashboard()">Create Games</button>
         </div>
         <div class="col text-right millis">
             <!-- <app-millis-this-quest class="col text-right" [millis]="5268"></app-millis-this-quest> -->
-            <p>Millis Earned this Quest: <span class="millis">30</span></p>
+            <p>Millis Earned this Quest: <span class="millis">{{earnedMillis}}</span></p>
         </div>
     </div>
 </div>
